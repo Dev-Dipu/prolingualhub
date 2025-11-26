@@ -105,7 +105,7 @@ const Footer = () => {
             ref={containerRef}
             className="relative h-screen w-full bg-white flex flex-col items-center justify-center overflow-hidden"
         >
-            <div className="flex items-center justify-center gap-4 text-5xl md:text-7xl font-bold text-black">
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-4xl md:text-7xl font-bold text-black text-center">
                 <span ref={iRef} className="inline-block">
                     I
                 </span>
@@ -121,7 +121,7 @@ const Footer = () => {
             </div>
 
             {/* Contact Info */}
-            <div className="absolute font-normal bottom-10 left-10 text-gray-500 text-sm md:text-base space-y-1">
+            <div className="absolute font-normal bottom-10 left-4 md:left-10 text-gray-500 text-xs md:text-base space-y-1">
                 <p>Email: example@gmail.com</p>
                 <p>Phone: 6842 4345 34</p>
                 <p>Linkedin: examinlinkedin.com</p>
