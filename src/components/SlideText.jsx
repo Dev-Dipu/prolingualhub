@@ -76,7 +76,7 @@ const SlideText = () => {
                 {Array.from({ length: copies }).map((_, i) => (
                     <div
                         key={i}
-                        className="word-line absolute left-1/2 top-1/2 -translate-y-1/2 flex text-9xl font-bold text-black leading-none tracking-tight"
+                        className="word-line absolute left-1/2 top-1/2 -translate-y-1/2 flex text-5xl md:text-9xl font-bold text-black leading-none tracking-tight"
                         style={{
                             zIndex: copies - i,
                             transform: "translate(-50%, -50%) scale(0.9)", // reduced spacing
