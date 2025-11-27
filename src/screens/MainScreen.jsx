@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 
 const MainScreen = () => {
   return (
-    <div className='w-full font-[dm_sans]'>
+    <div className='w-full overflow-hidden font-[dm_sans] selection:bg-redy selection:text-whitey'>
       <Home />
       <CombineText />
       <SlideText />
