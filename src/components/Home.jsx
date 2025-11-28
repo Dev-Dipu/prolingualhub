@@ -6,7 +6,7 @@ const Home = () => {
         <div className="h-screen w-full flex items-center justify-center">
             <TypingText
                 className="text-[15vw] md:text-[180px] text-redy font-semibold"
-                text={"English"}
+                text={"ENGLISH"}
                 speed={0.35}
                 delay={2}
             />
