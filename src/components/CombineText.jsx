@@ -32,7 +32,7 @@ const CombineText = () => {
                     {
                         xPercent: -150,
                         yPercent: -150,
-                        rotation: -15,
+                        // rotation: -15,
                         filter: "blur(7.5px)",
                         opacity: 0.8,
                     },
@@ -43,7 +43,7 @@ const CombineText = () => {
                     {
                         xPercent: 150,
                         yPercent: -100,
-                        rotation: 10,
+                        // rotation: 10,
                         filter: "blur(7.5px)",
                         opacity: 0.8,
                     },
@@ -54,7 +54,7 @@ const CombineText = () => {
                     {
                         xPercent: 200,
                         yPercent: 50,
-                        rotation: 5,
+                        // rotation: 5,
                         filter: "blur(7.5px)",
                         opacity: 0.8,
                     },
@@ -65,7 +65,7 @@ const CombineText = () => {
                     {
                         xPercent: -150,
                         yPercent: 150,
-                        rotation: -10,
+                        // rotation: -10,
                         filter: "blur(7.5px)",
                         opacity: 0.8,
                     },
@@ -75,7 +75,7 @@ const CombineText = () => {
                     words[5],
                     {
                         yPercent: 200,
-                        rotation: -5,
+                        // rotation: -5,
                         filter: "blur(7.5px)",
                         opacity: 0.8,
                     },
@@ -86,7 +86,7 @@ const CombineText = () => {
                     {
                         xPercent: 150,
                         yPercent: 150,
-                        rotation: 15,
+                        // rotation: 15,
                         filter: "blur(7.5px)",
                         opacity: 0.8,
                     },
@@ -112,7 +112,7 @@ const CombineText = () => {
                     {
                         xPercent: -75,
                         yPercent: -75,
-                        rotation: -15,
+                        // rotation: -15,
                         filter: "blur(7.5px)",
                         opacity: 0.8,
                     },
@@ -123,7 +123,7 @@ const CombineText = () => {
                     {
                         xPercent: 75,
                         yPercent: -50,
-                        rotation: 10,
+                        // rotation: 10,
                         filter: "blur(7.5px)",
                         opacity: 0.8,
                     },
@@ -134,7 +134,7 @@ const CombineText = () => {
                     {
                         xPercent: 100,
                         yPercent: 25,
-                        rotation: 5,
+                        // rotation: 5,
                         filter: "blur(7.5px)",
                         opacity: 0.8,
                     },
@@ -145,7 +145,7 @@ const CombineText = () => {
                     {
                         xPercent: -75,
                         yPercent: 75,
-                        rotation: -10,
+                        // rotation: -10,
                         filter: "blur(7.5px)",
                         opacity: 0.8,
                     },
@@ -155,7 +155,7 @@ const CombineText = () => {
                     words[5],
                     {
                         yPercent: 100,
-                        rotation: -5,
+                        // rotation: -5,
                         filter: "blur(7.5px)",
                         opacity: 0.8,
                     },
@@ -166,7 +166,7 @@ const CombineText = () => {
                     {
                         xPercent: 75,
                         yPercent: 75,
-                        rotation: 15,
+                        // rotation: 15,
                         filter: "blur(7.5px)",
                         opacity: 0.8,
                     },

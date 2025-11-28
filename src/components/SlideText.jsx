@@ -11,7 +11,7 @@ const SlideText = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            const words = wrapperRef.current.querySelectorAll(".word-line");
+            const words = [...wrapperRef.current.querySelectorAll(".word-line")];
             const allChars = wrapperRef.current.querySelectorAll(".char");
 
             const tl = gsap.timeline({
@@ -24,37 +24,51 @@ const SlideText = () => {
                 },
             });
 
-            // -------------------------------------------
-            // FIX 1 — closest → farthest movement
-            // -------------------------------------------
-            const reversedWords = [...words].reverse();
+            // -----------------------------------------
+            // 1. Stack moves upward (closest → farthest)
+            // -----------------------------------------
+            const reversed = [...words].reverse(); // closest first
 
-            reversedWords.forEach((word, i) => {
-                const targetY = -70 * i; // Reduced gap (70%)
-
+            reversed.forEach((word, i) => {
                 tl.to(
                     word,
                     {
-                        yPercent: targetY,
+                        y: -80 * i, // Upward stacking style like Multitask
                         duration: 1,
                         ease: "power2.out",
+                        opacity: 1,
                     },
-                    i * 0.5 // closest goes first
+                    i * 0.3
                 );
             });
 
-            // -------------------------------------------
-            // FIX 2 — Color change top → bottom, left → right
-            // -------------------------------------------
+            // -----------------------------------------
+            // 2. Highlight animation (RED instead of green)
+            // -----------------------------------------
             tl.to(
                 allChars,
                 {
                     color: "#DC2626",
-                    stagger: 0.05,
-                    duration: 0.2,
+                    stagger: 0.04,
+                    duration: 0.3,
                     ease: "none",
                 },
-                ">-0.5"
+                ">-0.3"
+            );
+
+            // -----------------------------------------
+            // 3. Smooth exit (fade + move up)
+            // -----------------------------------------
+            tl.to(
+                words,
+                {
+                    y: "-=200",
+                    opacity: 0,
+                    duration: 1,
+                    stagger: 0.1,
+                    ease: "power1.out",
+                },
+                ">-0.2"
             );
         }, containerRef);
 
@@ -62,7 +76,7 @@ const SlideText = () => {
     }, []);
 
     const text = "Book";
-    const copies = 5;
+    const copies = 5; // number of clones
 
     return (
         <div
@@ -76,10 +90,10 @@ const SlideText = () => {
                 {Array.from({ length: copies }).map((_, i) => (
                     <div
                         key={i}
-                        className="word-line absolute left-1/2 top-1/2 -translate-y-1/2 flex text-5xl md:text-9xl font-bold text-black leading-none tracking-tight"
+                        className="word-line absolute left-1/2 top-1/2 flex text-5xl md:text-9xl font-bold leading-none tracking-tight opacity-40"
                         style={{
                             zIndex: copies - i,
-                            transform: "translate(-50%, -50%) scale(0.9)", // reduced spacing
+                            transform: "translate(-50%, -50%) scale(0.92)", // tight stack
                         }}
                     >
                         {text.split("").map((char, index) => (
