@@ -9,40 +9,63 @@ const BlurRevealText = () => {
     const containerRef = useRef(null);
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            const sections =
-                containerRef.current.querySelectorAll(".text-section");
+    const ctx = gsap.context(() => {
+        const sections = containerRef.current.querySelectorAll(".text-section");
 
-            sections.forEach((section) => {
-                const words = section.querySelectorAll(".word");
+        sections.forEach((section) => {
+            const words = section.querySelectorAll(".word");
 
-                gsap.fromTo(
-                    words,
-                    {
-                        filter: "blur(20px)",
-                        opacity: 0,
-                        y: 100,
-                    },
-                    {
-                        filter: "blur(0px)",
-                        opacity: 1,
-                        y: 0,
-                        duration: 1,
-                        stagger: 0.1,
-                        ease: "power3.inout",
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top 20%",
-                            end: "top 80%",
-                            scrub: 1,
-                        },
-                    }
-                );
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top top",
+                    end: "+=200%",
+                    scrub: true,
+                    pin: true,
+                },
             });
-        }, containerRef);
 
-        return () => ctx.revert();
-    }, []);
+            // SUPER-SMOOTH REVEAL (NO HARD BLUR)
+            tl.fromTo(
+                words,
+                {
+                    opacity: 0,
+                    scale: 0.85,
+                    y: 40,
+                    rotationX: 25,     // adds soft 3D reveal
+                    transformOrigin: "top center",
+                },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    y: 0,
+                    rotationX: 0,
+                    stagger: { amount: 0.6, ease: "power3.out" },
+                    ease: "power3.out",
+                    duration: 1,
+                }
+            );
+
+            // HOLD CLEAN STATE
+            tl.to(words, { opacity: 1, duration: 0.3 });
+
+            // SMOOTH EXIT (PREMIUM LOOK)
+            tl.to(words, {
+                opacity: 0,
+                scale: 1.15,
+                y: -40,
+                rotationX: -15,
+                stagger: { amount: 0.6, ease: "power2.in" },
+                ease: "power2.in",
+                duration: 1,
+            });
+        });
+    }, containerRef);
+
+    return () => ctx.revert();
+}, []);
+
+
 
     const items = [
         "book : workshop based on 6 senses",
