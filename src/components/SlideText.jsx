@@ -33,7 +33,7 @@ const SlideText = () => {
                 tl.to(
                     word,
                     {
-                        y: -80 * i, // Upward stacking style like Multitask
+                        y: -95 * i, // Upward stacking style like Multitask
                         duration: 1,
                         ease: "power2.out",
                         opacity: 1,
