@@ -1,16 +1,29 @@
-"use client"
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import Assessment from "@/components/Assessment";
 import AssessmentSelection from "@/components/AssessmentSelection";
 import AssessmentQuestion from "@/components/AssessmentQuestion";
 import AssessmentResult from "@/components/AssessmentResult";
-import { assessmentData } from "@/data/assessmentData";
 
 const AssessmentScreen = () => {
     const [step, setStep] = useState("intro"); // intro, selection, question, result
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [currentTypeIndex, setCurrentTypeIndex] = useState(0);
     const [scores, setScores] = useState({});
+    const [assessmentData, setAssessmentData] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await fetch("/api/admin/questions");
+                const data = await res.json();
+                setAssessmentData(data);
+            } catch (error) {
+                console.error("Failed to load assessment data", error);
+            }
+        };
+        fetchData();
+    }, []);
 
     const handleStartAssessment = () => {
         setStep("selection");
@@ -79,6 +92,13 @@ const AssessmentScreen = () => {
         // Handle join workshop action
         console.log("Join Workshop");
     };
+
+    if (!assessmentData)
+        return (
+            <div className="flex h-screen items-center justify-center">
+                Loading...
+            </div>
+        );
 
     // Calculate total progress
     const totalQuestions = selectedTypes.reduce(
