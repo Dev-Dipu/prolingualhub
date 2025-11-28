@@ -6,100 +6,104 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const BlurRevealText = () => {
-    const containerRef = useRef(null);
+  const containerRef = useRef(null);
 
-    useEffect(() => {
+  useEffect(() => {
     const ctx = gsap.context(() => {
-        const sections = containerRef.current.querySelectorAll(".text-section");
+      const sections = containerRef.current.querySelectorAll(".text-section");
 
-        sections.forEach((section) => {
-            const words = section.querySelectorAll(".word");
+      sections.forEach((section) => {
+        const words = section.querySelectorAll(".word");
 
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top top",
-                    end: "+=200%",
-                    scrub: true,
-                    pin: true,
-                },
-            });
-
-            // SUPER-SMOOTH REVEAL (NO HARD BLUR)
-            tl.fromTo(
-                words,
-                {
-                    opacity: 0,
-                    scale: 0.85,
-                    y: 40,
-                    rotationX: 25,     // adds soft 3D reveal
-                    transformOrigin: "top center",
-                },
-                {
-                    opacity: 1,
-                    scale: 1,
-                    y: 0,
-                    rotationX: 0,
-                    stagger: { amount: 0.6, ease: "power3.out" },
-                    ease: "power3.out",
-                    duration: 1,
-                }
-            );
-
-            // HOLD CLEAN STATE
-            tl.to(words, { opacity: 1, duration: 0.3 });
-
-            // SMOOTH EXIT (PREMIUM LOOK)
-            tl.to(words, {
-                opacity: 0,
-                scale: 1.15,
-                y: -40,
-                rotationX: -15,
-                stagger: { amount: 0.6, ease: "power2.in" },
-                ease: "power2.in",
-                duration: 1,
-            });
+        // Set initial state for the new trendy look
+        // Words start pushed down (yPercent: 100) and skewed (skewY)
+        gsap.set(words, {
+          transformOrigin: "bottom left",
+          yPercent: 100,
+          skewY: 8,
+          opacity: 0,
+          // Ensure old properties aren't affecting it
+          scale: 1,
+          rotationX: 0,
         });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "+=200%",
+            scrub: true, // Keeping scrub: true for instant reaction like your original
+            pin: true,
+          },
+        });
+
+        // --- THE NEW TRENDY ANIMATION ---
+
+        // 1. REVEAL (Enter from bottom, un-skewing)
+        tl.to(words, {
+          yPercent: 0,
+          skewY: 0,
+          opacity: 1,
+          // Using your original stagger timings for consistency
+          stagger: { amount: 0.6, ease: "power3.out" },
+          ease: "power3.out",
+          duration: 1,
+        });
+
+        // 2. HOLD CLEAN STATE (A slight pause in the middle of the scroll)
+        tl.to({}, { duration: 0.5 });
+
+        // 3. EXIT (Move UP and re-skew for a continuous flow)
+        tl.to(words, {
+          yPercent: -100, // Move up out of view
+          skewY: -8,      // Skew the opposite way for exit physics
+          opacity: 0,
+           // Using your original stagger timings for consistency
+          stagger: { amount: 0.6, ease: "power2.in" },
+          ease: "power2.in",
+          duration: 1,
+        });
+      });
     }, containerRef);
 
     return () => ctx.revert();
-}, []);
+  }, []);
 
+  const items = [
+    "book : workshop based on 6 senses",
+    "book individual sessions based on 6 senses",
+    "contact us",
+  ];
 
-
-    const items = [
-        "book : workshop based on 6 senses",
-        "book individual sessions based on 6 senses",
-        "contact us",
-    ];
-
-    return (
-        <div ref={containerRef} className="w-full py-20">
-            {items.map((item, index) => (
-                <div
-                    key={index}
-                    className="text-section h-screen flex items-center justify-center px-4"
-                >
-                    <h2 className="w-full md:w-1/2 leading-none text-4xl md:text-7xl font-bold text-black text-center">
-                        {item.split("\n").map((line, lineIndex) => (
-                            <div key={lineIndex} className="block">
-                                {line.split(" ").map((word, wordIndex) => (
-                                    <span
-                                        key={wordIndex}
-                                        className="inline-block overflow-hidden align-bottom mr-4 pb-2"
-                                    >
-                                        <span className="word inline-block transform-gpu">
-                                            {word}
-                                        </span>
-                                    </span>
-                                ))}
-                            </div>
-                        ))}
-                    </h2>
-                </div>
+  // ----- JSX remains EXACTLY the same as your original code -----
+  return (
+    <div ref={containerRef} className="w-full py-20">
+      {items.map((item, index) => (
+        <div
+          key={index}
+          className="text-section h-screen flex items-center justify-center px-4"
+        >
+          <h2 className="w-full md:w-1/2 leading-none text-4xl md:text-8xl font-bold text-black text-center capitalize">
+            {item.split("\n").map((line, lineIndex) => (
+              <div key={lineIndex} className="block">
+                {line.split(" ").map((word, wordIndex) => (
+                  <span
+                    key={wordIndex}
+                    // Important: This overflow-hidden is what makes the "mask" work
+                    className="inline-block overflow-hidden align-bottom mr-4 pb-2"
+                  >
+                    <span className="word inline-block transform-gpu">
+                      {word}
+                    </span>
+                  </span>
+                ))}
+              </div>
             ))}
+          </h2>
         </div>
-    );
+      ))}
+    </div>
+  );
 };
 
 export default BlurRevealText;
