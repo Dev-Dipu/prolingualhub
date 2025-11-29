@@ -113,14 +113,7 @@ const AssessmentScreen = () => {
 
     return (
         <div className="w-full h-screen overflow-hidden font-[dm_sans] selection:bg-redy selection:text-whitey bg-white flex flex-col">
-            {/* Header/Nav Placeholder */}
-            <div className="p-6 fixed top-0 left-0 flex justify-between items-center">
-                <div className="text-redy font-bold text-xl">
-                    <span className="font-bold">En</span>{" "}
-                    <span className="text-gray-300">|</span>{" "}
-                    <span className="text-gray-300">Ru</span>
-                </div>
-            </div>
+            
 
             <div className="flex-1 overflow-y-auto">
                 {step === "intro" && (

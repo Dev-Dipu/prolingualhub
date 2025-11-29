@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLanguage } from "@/context/LanguageContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,7 +12,9 @@ const SlideText = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            const words = [...wrapperRef.current.querySelectorAll(".word-line")];
+            const words = [
+                ...wrapperRef.current.querySelectorAll(".word-line"),
+            ];
             const allChars = wrapperRef.current.querySelectorAll(".char");
 
             const tl = gsap.timeline({
@@ -75,7 +78,8 @@ const SlideText = () => {
         return () => ctx.revert();
     }, []);
 
-    const text = "Book";
+    const { t } = useLanguage();
+    const text = t.slideText.word;
     const copies = 5; // number of clones
 
     return (

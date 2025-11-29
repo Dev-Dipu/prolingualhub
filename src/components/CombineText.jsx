@@ -3,9 +3,12 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { useLanguage } from "@/context/LanguageContext";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const CombineText = () => {
+    const { t } = useLanguage();
     const containerRef = useRef(null);
     const textRef = useRef(null);
 
@@ -188,15 +191,24 @@ const CombineText = () => {
                 className="flex flex-col items-center justify-center text-5xl md:text-7xl font-bold text-black leading-tight text-center"
             >
                 <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-4 gap-y-2 leading-tight">
-                    <span className="word inline-block">tired</span>
-                    <span className="word inline-block">of paying</span>
-                    <span className="word inline-block">but</span>
-                    <span className="word inline-block">still</span>
+                    {t.combineText.line1.map((word, index) => (
+                        <span
+                            key={`line1-${index}`}
+                            className="word inline-block"
+                        >
+                            {word}
+                        </span>
+                    ))}
                 </div>
                 <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-4 gap-y-2 leading-none">
-                    <span className="word inline-block">cannot</span>
-                    <span className="word inline-block">speak</span>
-                    <span className="word inline-block">english</span>
+                    {t.combineText.line2.map((word, index) => (
+                        <span
+                            key={`line2-${index}`}
+                            className="word inline-block"
+                        >
+                            {word}
+                        </span>
+                    ))}
                 </div>
             </div>
         </div>

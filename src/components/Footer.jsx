@@ -3,9 +3,12 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { useLanguage } from "@/context/LanguageContext";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
+    const { t } = useLanguage();
     const containerRef = useRef(null);
     const iRef = useRef(null);
     const heartRef = useRef(null);
@@ -107,7 +110,7 @@ const Footer = () => {
         >
             <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-4xl md:text-7xl font-bold text-black text-center">
                 <span ref={iRef} className="inline-block">
-                    I
+                    {t.footer.i}
                 </span>
                 <span
                     ref={heartRef}
@@ -122,9 +125,9 @@ const Footer = () => {
 
             {/* Contact Info */}
             <div className="absolute font-normal bottom-10 left-4 md:left-10 text-gray-500 text-xs md:text-base space-y-1">
-                <p>Email: example@gmail.com</p>
-                <p>Phone: 6842 4345 34</p>
-                <p>Linkedin: examinlinkedin.com</p>
+                <p>{t.footer.contact.email}</p>
+                <p>{t.footer.contact.phone}</p>
+                <p>{t.footer.contact.linkedin}</p>
             </div>
         </div>
     );
