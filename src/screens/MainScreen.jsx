@@ -55,7 +55,7 @@ const MainContent = () => {
                 onClick={() =>
                     window.open("https://cal.com", "_blank")
                 }
-                className="text-redy border border-redy py-2 px-4 rounded-md cursor-pointer fixed bottom-5 right-5 z-50 uppercase bg-white hover:bg-redy hover:text-white transition-colors duration-300"
+                className="text-redy border border-redy py-2 px-4 rounded-md cursor-pointer fixed bottom-5 right-5 z-50 uppercase hover:bg-redy hover:text-white transition-colors duration-300"
             >
                 prolingualhub
             </button>
