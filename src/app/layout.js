@@ -1,4 +1,5 @@
-import { DM_Sans, DM_Mono, Caveat } from "next/font/google";
+import { DM_Sans, DM_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -7,9 +8,10 @@ const dmSans = DM_Sans({
     subsets: ["latin"],
 });
 
-const caveat = Caveat({
-    variable: "--font-caveat",
-    subsets: ["latin"],
+const supfont = localFont({
+    src: "../../public/fonts/supfont.otf",
+    variable: "--font-supfont",
+    weight: "400",
 });
 
 // const dmMono = DM_Mono({
@@ -28,7 +30,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body
-                className={`${dmSans.variable} ${caveat.variable} antialiased`}
+                className={`${dmSans.variable} ${supfont.variable} antialiased`}
             >
                 <SmoothScrolling>{children}</SmoothScrolling>
             </body>

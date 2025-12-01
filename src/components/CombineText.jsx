@@ -269,7 +269,7 @@ const CombineText = () => {
     return (
         <div
             ref={containerRef}
-            className="h-screen w-full flex items-center justify-center overflow-hidden uppercase"
+            className="h-screen w-full flex items-center justify-center overflow-hidden capitalize"
         >
             <div
                 ref={textRef}
@@ -301,8 +301,8 @@ const CombineText = () => {
             <div className="absolute bottom-24 right-6 md:bottom-16 md:right-22 flex flex-col items-end pointer-events-none z-20">
                 <div
                     ref={ctaTextRef}
-                    className="font-[caveat] text-2xl md:text-4xl text-redy -mb-8 mr-12 md:mr-42  origin-bottom-right"
-                    style={{ fontFamily: "var(--font-caveat)" }}
+                    className="font-(--font-supfont) text-2xl md:text-4xl text-redy -mb-8 mr-12 md:mr-42  origin-bottom-right"
+                    style={{ fontFamily: "var(--font-supfont)" }}
                 >
                     Book your workshop
                 </div>
