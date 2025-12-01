@@ -53,7 +53,7 @@ const MainContent = () => {
             <Footer />
             <button
                 onClick={() =>
-                    window.open("https://cal.com", "_blank")
+                    window.open("https://cal.com")
                 }
                 className="text-redy border border-redy py-2 px-4 rounded-md cursor-pointer fixed bottom-5 right-5 z-50 uppercase hover:bg-redy hover:text-white transition-colors duration-300"
             >

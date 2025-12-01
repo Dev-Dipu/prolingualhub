@@ -1,9 +1,14 @@
-import { DM_Sans, DM_Mono } from "next/font/google";
+import { DM_Sans, DM_Mono, Caveat } from "next/font/google";
 import "./globals.css";
 
 const dmSans = DM_Sans({
     variable: "--font-dm-sans",
     weight: ["400", "700"],
+    subsets: ["latin"],
+});
+
+const caveat = Caveat({
+    variable: "--font-caveat",
     subsets: ["latin"],
 });
 
@@ -22,7 +27,9 @@ import SmoothScrolling from "../utilities/SmoothScrolling";
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body className={`${dmSans.variable} antialiased`}>
+            <body
+                className={`${dmSans.variable} ${caveat.variable} antialiased`}
+            >
                 <SmoothScrolling>{children}</SmoothScrolling>
             </body>
         </html>
