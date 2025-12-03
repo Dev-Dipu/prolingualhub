@@ -31,13 +31,7 @@ const AssessmentSelection = ({ onStart }) => {
             title: "Vocabulary Test",
             description: "Measure the breadth and depth of your vocabulary.",
             icon: <Type className="w-6 h-6 text-redy" />,
-        },
-        {
-            id: "speaking",
-            title: "Speaking Ability Test",
-            description: "Test your pronunciation, fluency, and coherence.",
-            icon: <Mic className="w-6 h-6 text-redy" />,
-        },
+        }
     ];
 
     return (

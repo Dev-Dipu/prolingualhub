@@ -14,10 +14,11 @@ const supfont = localFont({
     weight: "400",
 });
 
-// const dmMono = DM_Mono({
-//   variable: "--font-dm-mono",
-//   subsets: ["latin"],
-// });
+const dmMono = DM_Mono({
+  variable: "--font-dm-mono",
+  weight: ["400"],
+  subsets: ["latin"],
+});
 
 export const metadata = {
     title: "Create Next App",
@@ -30,7 +31,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body
-                className={`${dmSans.variable} ${supfont.variable} antialiased`}
+                className={`${dmSans.variable} ${supfont.variable} ${dmMono.variable} antialiased`}
             >
                 <SmoothScrolling>{children}</SmoothScrolling>
             </body>

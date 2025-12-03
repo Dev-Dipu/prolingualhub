@@ -19,7 +19,7 @@ const MainContent = () => {
     const { toggleLanguage, language } = useLanguage();
 
     return (
-        <div className="w-full overflow-hidden font-[dm_sans] selection:bg-redy selection:text-whitey">
+        <div className="w-full overflow-hidden font-[dm_mono] selection:bg-redy selection:text-whitey">
             {/* Header/Nav Placeholder */}
             <div className="p-6 fixed top-0 left-0 flex justify-between items-center z-50">
                 <div className="font-bold text-xl flex items-center gap-1">

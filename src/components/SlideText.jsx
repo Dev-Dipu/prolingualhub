@@ -143,7 +143,7 @@ const SlideText = () => {
     return (
         <div
             ref={containerRef}
-            className="h-screen w-full flex items-center justify-center overflow-hidden bg-white"
+            className="h-screen w-full flex items-center justify-center overflow-hidden"
         >
             <div
                 ref={wrapperRef}

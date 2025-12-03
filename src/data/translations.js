@@ -1,7 +1,7 @@
 export const translations = {
     en: {
         home: {
-            mainText: "ENGLISH",
+            mainText: "ENGLISH ENGLISH ENGLISH.",
         },
         combineText: {
             line1: ["tired", "of paying", "but", "still"],
@@ -28,7 +28,7 @@ export const translations = {
     },
     ru: {
         home: {
-            mainText: "РУССКИЙ",
+            mainText: "РУССКИЙ РУССКИЙ РУССКИЙ.",
         },
         combineText: {
             line1: ["устали", "платить", "но", "все еще"],
