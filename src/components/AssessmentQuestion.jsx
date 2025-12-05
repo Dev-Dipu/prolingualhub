@@ -78,7 +78,7 @@ const AssessmentQuestion = ({
                         {data.questions.length}
                     </p>
 
-                    <h2 className="text-2xl md:text-3xl font-bold mb-8 leading-tight">
+                    <h2 className="text-2xl md:text-3xl font-bold mb-8 leading-tight hidden md:block">
                         {currentQuestion.type === "fill-in-blank"
                             ? "Choose the correct word to fill in the blank."
                             : "Select the Correct Choice"}

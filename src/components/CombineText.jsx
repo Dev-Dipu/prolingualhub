@@ -152,7 +152,7 @@ const CombineText = () => {
     return (
         <div
             ref={containerRef}
-            className="h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-whitey relative opacity-0"
+            className="h-dvh w-full flex flex-col items-center justify-center overflow-hidden bg-whitey relative opacity-0"
         >
             {/* WRAPPER WITH FLEX-WRAP (VERY IMPORTANT) */}
             <div
