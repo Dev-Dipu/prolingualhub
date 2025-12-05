@@ -2,7 +2,7 @@ import React from "react";
 
 const Assessment = ({ onStart, onJoinWorkshop }) => {
     return (
-        <div className="flex h-screen items-center justify-center flex-col gap-4">
+        <div className="flex h-full items-center justify-center flex-col gap-4">
             <h1 className="text-4xl md:text-7xl font-semibold text-center px-4">
                 Check your English level
             </h1>

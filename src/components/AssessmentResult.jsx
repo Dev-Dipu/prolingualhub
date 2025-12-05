@@ -33,7 +33,7 @@ const AssessmentResult = ({ scores, onRetake, onJoinWorkshop }) => {
     };
 
     return (
-        <div className="w-full h-screen flex justify-center flex-col max-w-4xl mx-auto px-4 py-8">
+        <div className="w-full h-full flex justify-center flex-col max-w-4xl mx-auto px-4 py-8">
             <h1 className="text-3xl md:text-4xl font-bold text-center mb-2">
                 Assessment Complete!
             </h1>
