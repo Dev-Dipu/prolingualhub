@@ -1,11 +1,12 @@
 export const translations = {
     en: {
         home: {
-            mainText: "ENGLISH ENGLISH ENGLISH.",
+            mainText: "ENGLISH",
         },
         combineText: {
             line1: ["tired", "of paying", "but", "still"],
             line2: ["cannot", "speak", "english"],
+            cta: "Book your workshop",
         },
         slideText: {
             word: "Book",
@@ -28,11 +29,12 @@ export const translations = {
     },
     ru: {
         home: {
-            mainText: "РУССКИЙ РУССКИЙ РУССКИЙ.",
+            mainText: "РУССКИЙ",
         },
         combineText: {
             line1: ["устали", "платить", "но", "все еще"],
             line2: ["не можете", "говорить", "по-английски"],
+            cta: "Записаться на семинар",
         },
         slideText: {
             word: "Книга",

@@ -10,6 +10,10 @@ function SmoothScrolling({ children }) {
     const lenisRef = useRef();
 
     useEffect(() => {
+        // Force scroll to top on page reload
+        window.history.scrollRestoration = "manual";
+        window.scrollTo(0, 0);
+
         function update(time) {
             lenisRef.current?.lenis?.raf(time * 1000);
         }
