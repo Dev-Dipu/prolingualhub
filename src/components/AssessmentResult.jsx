@@ -43,7 +43,7 @@ const AssessmentResult = ({ scores, onRetake, onJoinWorkshop }) => {
             </p>
 
             {/* Main Result Card */}
-            <div className="bg-white rounded-2xl border border-red-100 p-4 md:p-6 md:pl-8 md:py-2 flex md:flex-row items-center justify-between shadow-sm md:mb-12 mb-8">
+            <div className="bg-whitey rounded-2xl border border-red-100 p-4 md:p-6 md:pl-8 md:py-2 flex md:flex-row items-center justify-between shadow-sm md:mb-12 mb-8">
                 <div className="flex-1">
                     <p className="text-gray-500 mb-2">Your English Level</p>
                     <h2 className="text-4xl font-bold text-redy mb-4">
@@ -128,7 +128,7 @@ const AssessmentResult = ({ scores, onRetake, onJoinWorkshop }) => {
                 {Object.entries(scores).map(([key, data]) => (
                     <div
                         key={key}
-                        className="bg-white p-4 md:p-6 rounded-xl border border-gray-100 shadow-sm"
+                        className="bg-whitey p-4 md:p-6 rounded-xl border border-gray-100 shadow-sm"
                     >
                         <div className="mb-4">{getIcon(key)}</div>
                         <h4 className="font-bold md:text-lg mb-2">{data.title}</h4>

@@ -72,7 +72,7 @@ const AssessmentQuestion = ({
 
             {/* Question Card */}
             <div className="flex-1 flex flex-col justify-center my-6">
-                <div className="bg-white rounded-xl border border-red-100 p-6 md:p-8 shadow-sm w-full">
+                <div className="bg-whitey rounded-xl border border-red-100 p-6 md:p-8 shadow-sm w-full">
                     <p className="text-gray-500 mb-4">
                         Question {currentQuestionIndex + 1} Of{" "}
                         {data.questions.length}

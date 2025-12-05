@@ -51,8 +51,8 @@ const AssessmentSelection = ({ onStart }) => {
                         className={`p-6 rounded-lg border-2 cursor-pointer transition-all duration-200 flex flex-col items-start gap-4 h-full
               ${
                   selectedTypes.includes(option.id)
-                      ? "border-red-200 shadow-[0_0_15px_rgba(220,38,38,0.1)] bg-white"
-                      : "border-gray-100 hover:border-gray-200 bg-white"
+                      ? "border-red-200 shadow-[0_0_15px_rgba(220,38,38,0.1)] bg-whitey"
+                      : "border-gray-100 hover:border-gray-200 bg-whitey"
               }`}
                     >
                         <div className="p-2 bg-red-50 rounded-lg">

@@ -120,7 +120,7 @@ const AdminPage = () => {
             <div className="flex items-center justify-center h-screen bg-gray-100 font-[dm_sans]">
                 <form
                     onSubmit={handleLogin}
-                    className="bg-white p-8 rounded-lg shadow-md w-96"
+                    className="bg-whitey p-8 rounded-lg shadow-md w-96"
                 >
                     <h1 className="text-2xl font-bold mb-6 text-center">
                         Admin Login
@@ -192,7 +192,7 @@ const AdminPage = () => {
                 </div>
 
                 {/* Content */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div className="bg-whitey rounded-xl shadow-sm border border-gray-100 p-6">
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-xl font-bold">
                             {data[activeTab].title} Questions
@@ -269,7 +269,7 @@ const AdminPage = () => {
             {/* Add Question Modal */}
             {showAddModal && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
+                    <div className="bg-whitey rounded-xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
                         <div className="flex justify-between items-center mb-6">
                             <h2 className="text-xl font-bold">
                                 Add New Question
