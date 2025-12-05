@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 
-const AssessmentQuestion = ({ data, onNext, onSkip, totalProgress }) => {
+const AssessmentQuestion = ({
+    data,
+    onNext,
+    onSkip,
+    totalQuestions,
+    completedQuestionsCount,
+}) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState(null);
     const [isAnswered, setIsAnswered] = useState(false);
@@ -10,7 +16,6 @@ const AssessmentQuestion = ({ data, onNext, onSkip, totalProgress }) => {
     const isLastQuestion = currentQuestionIndex === data.questions.length - 1;
 
     const handleOptionSelect = (option) => {
-        if (isAnswered) return;
         setSelectedOption(option);
         setIsAnswered(true);
     };
@@ -39,24 +44,30 @@ const AssessmentQuestion = ({ data, onNext, onSkip, totalProgress }) => {
         }
     };
 
-    // Calculate progress for the current section
-    const sectionProgress =
-        ((currentQuestionIndex + 1) / data.questions.length) * 100;
+    // Calculate global progress
+    // "completedQuestionsCount" covers previous sections
+    // "currentQuestionIndex" is how many we've passed in this section (0-indexed)
+    // We add 1 to show "current position" progress, so 1st question isn't 0%
+    const currentGlobalQuestion =
+        completedQuestionsCount + currentQuestionIndex + 1;
+    const progressPercentage = (currentGlobalQuestion / totalQuestions) * 100;
 
     return (
         <div className="w-full max-w-3xl mx-auto px-4 flex flex-col h-full justify-center">
             {/* Progress Bar */}
             <div className="mb-8">
                 <div className="flex justify-between text-sm font-medium mb-2">
-                    <span>{Math.round(totalProgress)}% Complete</span>
+                    <span>{Math.round(progressPercentage)}% Complete</span>
                 </div>
                 <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
                     <div
                         className="h-full bg-redy transition-all duration-300 ease-out"
-                        style={{ width: `${totalProgress}%` }}
+                        style={{ width: `${progressPercentage}%` }}
                     />
                 </div>
-                <p className="text-xs text-gray-400 mt-2">Step: {data.title}</p>
+                <p className="text-xs text-gray-400 mt-2">
+                    Phase: {data.title}
+                </p>
             </div>
 
             {/* Question Card */}

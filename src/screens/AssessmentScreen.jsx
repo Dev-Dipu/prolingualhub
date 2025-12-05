@@ -89,8 +89,7 @@ const AssessmentScreen = () => {
     };
 
     const handleJoinWorkshop = () => {
-        // Handle join workshop action
-        console.log("Join Workshop");
+        window.open("https://cal.com");
     };
 
     if (!assessmentData)
@@ -108,16 +107,18 @@ const AssessmentScreen = () => {
     const currentType = selectedTypes[currentTypeIndex];
     // This is a simplified progress calculation. For more accuracy, we'd need to track exact question index in parent.
     // For now, we can pass a calculated progress based on completed sections.
-    const completedSectionsProgress =
-        (currentTypeIndex / selectedTypes.length) * 100;
+    const completedQuestionsCount = selectedTypes
+        .slice(0, currentTypeIndex)
+        .reduce((acc, type) => acc + assessmentData[type].questions.length, 0);
 
     return (
         <div className="w-full h-screen overflow-hidden font-[dm_sans] selection:bg-redy selection:text-whitey bg-white flex flex-col">
-            
-
             <div className="flex-1 overflow-y-auto">
                 {step === "intro" && (
-                    <Assessment onStart={handleStartAssessment} />
+                    <Assessment
+                        onStart={handleStartAssessment}
+                        onJoinWorkshop={handleJoinWorkshop}
+                    />
                 )}
 
                 {step === "selection" && (
@@ -130,7 +131,8 @@ const AssessmentScreen = () => {
                         data={assessmentData[currentType]}
                         onNext={handleQuestionComplete}
                         onSkip={handleSkip}
-                        totalProgress={completedSectionsProgress}
+                        totalQuestions={totalQuestions}
+                        completedQuestionsCount={completedQuestionsCount}
                     />
                 )}
 

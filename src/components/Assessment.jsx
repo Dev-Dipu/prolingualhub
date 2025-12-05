@@ -1,9 +1,9 @@
 import React from "react";
 
-const Assessment = ({ onStart }) => {
+const Assessment = ({ onStart, onJoinWorkshop }) => {
     return (
         <div className="flex h-screen items-center justify-center flex-col gap-4">
-            <h1 className="text-7xl font-semibold ">
+            <h1 className="text-7xl font-semibold text-center">
                 Check your English level
             </h1>
             <p className="text-2xl font-medium md:w-1/2 text-center text-[#818181]">
@@ -17,7 +17,7 @@ const Assessment = ({ onStart }) => {
                 >
                     Start Assessment
                 </button>
-                <button className="text-redy border border-redy py-2 px-4 rounded-md cursor-pointer">
+                <button onClick={onJoinWorkshop} className="text-redy border border-redy py-2 px-4 rounded-md cursor-pointer">
                     Join Workshop
                 </button>
             </div>
