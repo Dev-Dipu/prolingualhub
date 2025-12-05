@@ -31,12 +31,12 @@ const AssessmentSelection = ({ onStart }) => {
             title: "Vocabulary Test",
             description: "Measure the breadth and depth of your vocabulary.",
             icon: <Type className="w-6 h-6 text-redy" />,
-        }
+        },
     ];
 
     return (
         <div className="flex flex-col items-center justify-center h-full w-full max-w-5xl mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-semibold mb-4 text-center">
+            <h1 className="text-3xl md:text-5xl font-semibold mb-4 text-center">
                 Complete English Skill Assessment
             </h1>
             <p className="text-lg text-gray-500 mb-12 text-center">
@@ -70,11 +70,11 @@ const AssessmentSelection = ({ onStart }) => {
                 ))}
             </div>
 
-            <div className="flex justify-end w-full">
+            <div className="flex justify-end w-full mb-8 md:mb-0">
                 <button
                     onClick={handleStart}
                     disabled={selectedTypes.length === 0}
-                    className={`px-8 py-3 cursor-pointer rounded-md font-semibold transition-colors
+                    className={`px-8 py-3 w-full md:w-auto cursor-pointer rounded-md font-semibold transition-colors
             ${
                 selectedTypes.length > 0
                     ? "bg-redy text-white hover:bg-red-700"

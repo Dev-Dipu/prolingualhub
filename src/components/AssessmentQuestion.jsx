@@ -53,9 +53,9 @@ const AssessmentQuestion = ({
     const progressPercentage = (currentGlobalQuestion / totalQuestions) * 100;
 
     return (
-        <div className="w-full max-w-3xl mx-auto px-4 flex flex-col h-full justify-center">
+        <div className="w-full max-w-3xl mx-auto px-4 flex flex-col h-full py-6">
             {/* Progress Bar */}
-            <div className="mb-8">
+            <div className="shrink-0">
                 <div className="flex justify-between text-sm font-medium mb-2">
                     <span>{Math.round(progressPercentage)}% Complete</span>
                 </div>
@@ -71,79 +71,86 @@ const AssessmentQuestion = ({
             </div>
 
             {/* Question Card */}
-            <div className="bg-white rounded-xl border border-red-100 p-8 shadow-sm mb-8">
-                <p className="text-gray-500 mb-4">
-                    Question {currentQuestionIndex + 1} Of{" "}
-                    {data.questions.length}
-                </p>
+            <div className="flex-1 flex flex-col justify-center my-6">
+                <div className="bg-white rounded-xl border border-red-100 p-6 md:p-8 shadow-sm w-full">
+                    <p className="text-gray-500 mb-4">
+                        Question {currentQuestionIndex + 1} Of{" "}
+                        {data.questions.length}
+                    </p>
 
-                <h2 className="text-3xl font-bold mb-8 leading-tight">
-                    {currentQuestion.type === "fill-in-blank"
-                        ? "Choose the correct word to fill in the blank."
-                        : "Select the Correct Choice"}
-                </h2>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-8 leading-tight">
+                        {currentQuestion.type === "fill-in-blank"
+                            ? "Choose the correct word to fill in the blank."
+                            : "Select the Correct Choice"}
+                    </h2>
 
-                {currentQuestion.type === "fill-in-blank" && (
-                    <div className="mb-8 p-6 border border-gray-200 rounded-lg bg-gray-50 text-center text-lg font-medium">
-                        {currentQuestion.question}
-                    </div>
-                )}
-                {currentQuestion.type === "multiple-choice" && (
-                    <div className="mb-8 p-6 border border-gray-200 rounded-lg bg-gray-50 text-center text-lg font-medium">
-                        {currentQuestion.question}
-                    </div>
-                )}
+                    {currentQuestion.type === "fill-in-blank" && (
+                        <div className="mb-8 p-6 border border-gray-200 rounded-lg bg-gray-50 text-center text-lg font-medium">
+                            {currentQuestion.question}
+                        </div>
+                    )}
+                    {currentQuestion.type === "multiple-choice" && (
+                        <div className="mb-8 p-6 border border-gray-200 rounded-lg bg-gray-50 text-center text-lg font-medium">
+                            {currentQuestion.question}
+                        </div>
+                    )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {currentQuestion.options.map((option, index) => {
-                        const isSelected = selectedOption === option;
-                        const isCorrect =
-                            option === currentQuestion.correctAnswer;
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {currentQuestion.options.map((option, index) => {
+                            const isSelected = selectedOption === option;
+                            // eslint-disable-next-line no-unused-vars
+                            const isCorrect =
+                                option === currentQuestion.correctAnswer;
 
-                        let buttonStyle =
-                            "border-gray-200 hover:border-gray-300";
-                        if (isAnswered) {
-                            if (isSelected) {
-                                buttonStyle =
-                                    "bg-red-50 border-red-200 text-black";
+                            let buttonStyle =
+                                "border-gray-200 hover:border-gray-300";
+                            if (isAnswered) {
+                                if (isSelected) {
+                                    buttonStyle =
+                                        "bg-red-50 border-red-200 text-black";
+                                }
                             }
-                        }
 
-                        return (
-                            <button
-                                key={index}
-                                onClick={() => handleOptionSelect(option)}
-                                className={`p-4 rounded-lg border text-left transition-all relative flex items-center justify-between ${buttonStyle}`}
-                            >
-                                <span className="font-medium">{option}</span>
-                                {isAnswered && isSelected && (
-                                    <CheckCircle2 className="w-5 h-5 text-redy" />
-                                )}
-                            </button>
-                        );
-                    })}
+                            return (
+                                <button
+                                    key={index}
+                                    onClick={() => handleOptionSelect(option)}
+                                    className={`p-4 rounded-lg border text-left transition-all relative flex items-center justify-between ${buttonStyle}`}
+                                >
+                                    <span className="font-medium">
+                                        {option}
+                                    </span>
+                                    {isAnswered && isSelected && (
+                                        <CheckCircle2 className="w-5 h-5 text-redy" />
+                                    )}
+                                </button>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
 
             {/* Navigation */}
-            <div className="flex justify-end gap-4">
-                <button
-                    onClick={handleSkip}
-                    className="px-8 py-2 rounded-md border border-red-200 text-redy font-medium hover:bg-red-50 transition-colors cursor-pointer"
-                >
-                    Skip
-                </button>
-                <button
-                    onClick={handleNext}
-                    disabled={!isAnswered}
-                    className={`px-8 py-2 cursor-pointer rounded-md font-medium transition-colors ${
-                        isAnswered
-                            ? "bg-redy text-white hover:bg-red-700"
-                            : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    }`}
-                >
-                    {isLastQuestion ? "Finish Section" : "Next"}
-                </button>
+            <div className="shrink-0 pt-4 border-t border-gray-100">
+                <div className="flex flex-col md:flex-row justify-end gap-4">
+                    <button
+                        onClick={handleSkip}
+                        className="px-8 py-2 w-full md:w-auto rounded-md border border-red-200 text-redy font-medium hover:bg-red-50 transition-colors cursor-pointer text-center"
+                    >
+                        Skip
+                    </button>
+                    <button
+                        onClick={handleNext}
+                        disabled={!isAnswered}
+                        className={`px-8 py-2 w-full md:w-auto cursor-pointer rounded-md font-medium transition-colors text-center ${
+                            isAnswered
+                                ? "bg-redy text-white hover:bg-red-700"
+                                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        }`}
+                    >
+                        {isLastQuestion ? "Finish Section" : "Next"}
+                    </button>
+                </div>
             </div>
         </div>
     );
