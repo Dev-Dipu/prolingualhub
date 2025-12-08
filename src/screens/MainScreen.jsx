@@ -6,6 +6,7 @@ import SlideText from "@/components/SlideText";
 import BlurRevealText from "@/components/BlurRevealText";
 import Footer from "@/components/Footer";
 import { LanguageProvider, useLanguage } from "@/context/LanguageContext";
+import { useRouter } from "next/navigation";
 
 const MainScreen = () => {
     return (
@@ -17,6 +18,7 @@ const MainScreen = () => {
 
 const MainContent = () => {
     const { toggleLanguage, language } = useLanguage();
+    const router = useRouter();
 
     return (
         <div className="w-full overflow-hidden font-[dm_mono] selection:bg-redy selection:text-whitey">
@@ -52,9 +54,9 @@ const MainContent = () => {
             <BlurRevealText />
             <Footer />
             <button
-                onClick={() =>
-                    window.open("https://cal.com")
-                }
+                onClick={() => {
+                    router.push("/assessment");
+                }}
                 className="text-redy border border-redy hover:bg-redy hover:text-white transition-colors duration-300 py-2 px-4 rounded-md cursor-pointer fixed bottom-5 right-5 z-50 uppercase"
             >
                 prolingualhub
