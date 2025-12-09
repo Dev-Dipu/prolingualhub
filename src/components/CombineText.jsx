@@ -269,7 +269,7 @@ const CombineText = () => {
     return (
         <div
             ref={containerRef}
-            className="h-screen w-full flex items-center justify-center overflow-hidden capitalize"
+            className="h-screen w-full flex items-center justify-center overflow-hidden uppercase"
         >
             <div
                 ref={textRef}

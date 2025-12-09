@@ -106,7 +106,7 @@ const Footer = () => {
     return (
         <div
             ref={containerRef}
-            className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden"
+            className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden uppercase"
         >
             <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-4xl md:text-7xl font-bold text-black text-center">
                 <span ref={iRef} className="inline-block">
