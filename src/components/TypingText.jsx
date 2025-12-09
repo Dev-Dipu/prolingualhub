@@ -16,16 +16,20 @@ const TypingText = ({
     const cursorRef = useRef(null);
 
     useEffect(() => {
-        const tl = gsap.timeline({ repeatDelay: delay });
+        const tl = gsap.timeline({ repeat: -1 });
 
         // Typing animation
         tl.to(textRef.current, {
             duration: text.length * 0.1 * (1 / speed),
             text: text,
-            repeat: -1,
-            yoyo: true,
             ease: "none",
         });
+
+        // Stay for 0.6 seconds
+        tl.to({}, { duration: 0.6 });
+
+        // Clear text immediately
+        tl.set(textRef.current, { text: "" });
 
         // Cursor blinking animation
         if (cursor) {

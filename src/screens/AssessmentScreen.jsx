@@ -112,7 +112,7 @@ const AssessmentScreen = () => {
         .reduce((acc, type) => acc + assessmentData[type].questions.length, 0);
 
     return (
-        <div className="w-full h-dvh overflow-hidden font-[dm_sans] selection:bg-redy selection:text-whitey bg-whitey flex flex-col">
+        <div className="w-full h-dvh overflow-hidden font-[dm_mono] selection:bg-redy selection:text-whitey bg-whitey flex flex-col">
             <div className="flex-1 overflow-y-auto">
                 {step === "intro" && (
                     <Assessment
