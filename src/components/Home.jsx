@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <div className="h-screen w-full flex items-center justify-center">
             <TypingText
-                className="text-[15vw] md:text-[180px] text-redy font-semibold"
+                className="text-[16vw] md:text-[22vw] text-redy font-semibold"
                 text={t.home.mainText}
                 speed={0.35}
                 delay={2}
