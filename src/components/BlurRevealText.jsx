@@ -6,10 +6,10 @@ import { useLanguage } from "@/context/LanguageContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const BlurRevealText = () => {
+const BlurRevealText = ({ items: propItems }) => {
     const containerRef = useRef(null);
     const { t } = useLanguage();
-    const items = t.blurRevealText.items;
+    const items = propItems || t.blurRevealText.items;
 
     useEffect(() => {
         const ctx = gsap.context(() => {

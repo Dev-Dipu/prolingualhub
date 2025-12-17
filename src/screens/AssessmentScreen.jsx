@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Assessment from "@/components/Assessment";
 import AssessmentSelection from "@/components/AssessmentSelection";
 import AssessmentQuestion from "@/components/AssessmentQuestion";
@@ -88,8 +89,10 @@ const AssessmentScreen = () => {
         setScores({});
     };
 
+    const router = useRouter();
+
     const handleJoinWorkshop = () => {
-        window.open("https://cal.com");
+        router.push("/courses");
     };
 
     if (!assessmentData)

@@ -301,7 +301,7 @@ const CombineText = () => {
             <div className="absolute bottom-16 right-22 flex flex-col items-end pointer-events-none z-20">
                 <div
                     ref={ctaTextRef}
-                    className="font-[supfont] text-2xl md:text-4xl text-center text-redy -mb-4 md:-mb-8 mr-20 md:mr-42 origin-bottom-right"
+                    className="font-[supfont] text-2xl md:text-4xl text-center text-redy -mb-4 md:-mb-8 mr-20 md:mr-42 origin-bottom-right capitalize"
                 >
                     {t.combineText.cta}
                 </div>

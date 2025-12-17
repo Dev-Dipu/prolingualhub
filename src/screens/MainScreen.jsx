@@ -4,6 +4,7 @@ import Home from "@/components/Home";
 import CombineText from "@/components/CombineText";
 import SlideText from "@/components/SlideText";
 import BlurRevealText from "@/components/BlurRevealText";
+import StorySection from "@/components/StorySection";
 import Footer from "@/components/Footer";
 import { LanguageProvider, useLanguage } from "@/context/LanguageContext";
 import { useRouter } from "next/navigation";
@@ -17,7 +18,7 @@ const MainScreen = () => {
 };
 
 const MainContent = () => {
-    const { toggleLanguage, language } = useLanguage();
+    const { toggleLanguage, language, t } = useLanguage();
     const router = useRouter();
 
     return (
@@ -51,7 +52,9 @@ const MainContent = () => {
             <Home />
             <CombineText />
             <SlideText />
-            <BlurRevealText />
+            <BlurRevealText items={t.blurRevealText.items.slice(0, 2)} />
+            <StorySection />
+            <BlurRevealText items={[t.blurRevealText.items[2]]} />
             <Footer />
             <button
                 onClick={() => {
