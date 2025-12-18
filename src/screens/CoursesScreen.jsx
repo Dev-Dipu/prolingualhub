@@ -68,7 +68,7 @@ const CoursesScreen = () => {
     ];
 
     return (
-        <div className="h-dvh w-full bg-whitey font-[dm_mono] flex flex-col overflow-hidden animate-in fade-in duration-500">
+        <div className="h-dvh w-full bg-whitey font-[dm_mono] flex flex-col overflow-hidden animate-in fade-in duration-500 selection:bg-redy selection:text-whitey">
             {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto md:overflow-hidden w-full">
                 <div className="max-w-7xl mx-auto p-4 md:p-8 min-h-full flex flex-col">
