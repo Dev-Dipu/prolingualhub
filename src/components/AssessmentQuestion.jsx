@@ -55,7 +55,7 @@ const AssessmentQuestion = ({
     return (
         <div className="w-full max-w-3xl mx-auto px-4 flex flex-col h-full py-6">
             {/* Progress Bar */}
-            <div className="shrink-0">
+            <div className="shrink-0 mt-4">
                 <div className="flex justify-between text-sm font-medium mb-2">
                     <span>{Math.round(progressPercentage)}% Complete</span>
                 </div>
