@@ -1,8 +1,23 @@
 import React from "react";
+import { useRouter } from "next/navigation";
+import { ChevronLeft } from "lucide-react";
 
 const Assessment = ({ onStart, onJoinWorkshop }) => {
+    const router = useRouter();
+    const handleBack = () => {
+        router.back();
+    };
     return (
-        <div className="flex h-full items-center justify-center flex-col gap-4">
+        <div className="flex h-full items-center justify-center flex-col gap-4 max-w-7xl mx-auto p-4 md:p-8 relative">
+            {/* Back Button */}
+            <div className="absolute top-8 left-8">
+                <button
+                    onClick={handleBack}
+                    className="mb-4 md:mb-8 p-2 -ml-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer inline-flex items-center"
+                >
+                    <ChevronLeft className="w-6 h-6 text-gray-500" />
+                </button>
+            </div>
             <h1 className="text-4xl md:text-7xl font-semibold text-center px-4">
                 Check your English level
             </h1>
