@@ -6,7 +6,7 @@ export const translations = {
         combineText: {
             line1: ["tired", "of paying", "but", "still"],
             line2: ["cannot", "speak", "english"],
-            cta: "Book your workshop",
+            cta: "Start Your English Journey",
         },
         slideText: {
             word: "Book",
