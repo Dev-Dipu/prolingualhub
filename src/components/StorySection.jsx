@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -160,8 +161,8 @@ const StorySection = () => {
                         className="relative bg-white p-3 pb-12 shadow-[0_10px_30px_rgba(0,0,0,0.1)] -rotate-3 w-64 md:w-80 border border-gray-100 will-change-transform"
                     >
                         <div className="w-full aspect-3/4 bg-gray-200 overflow-hidden relative grayscale opacity-90">
-                            <img
-                                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=688&auto=format&fit=crop"
+                            <Image width={622} height={415}
+                                src="/profilepic.jpg"
                                 alt="Irina"
                                 className="w-full h-full object-cover"
                             />
