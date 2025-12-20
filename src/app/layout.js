@@ -15,9 +15,9 @@ const supfont = localFont({
 });
 
 const dmMono = DM_Mono({
-  variable: "--font-dm-mono",
-  weight: ["400"],
-  subsets: ["latin"],
+    variable: "--font-dm-mono",
+    weight: ["400"],
+    subsets: ["latin"],
 });
 
 export const metadata = {
