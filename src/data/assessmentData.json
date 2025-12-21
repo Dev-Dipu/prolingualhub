@@ -8,12 +8,7 @@
         "id": 1,
         "type": "fill-in-blank",
         "question": "The cat is sitting ___ the table.",
-        "options": [
-          "on",
-          "in",
-          "at",
-          "under"
-        ],
+        "options": ["on", "in", "at", "under"],
         "correctAnswer": "on"
       },
       {
@@ -32,12 +27,7 @@
         "id": 3,
         "type": "fill-in-blank",
         "question": "I ___ to the store yesterday.",
-        "options": [
-          "go",
-          "gone",
-          "went",
-          "going"
-        ],
+        "options": ["go", "gone", "went", "going"],
         "correctAnswer": "went"
       }
     ]
@@ -51,24 +41,14 @@
         "id": 1,
         "type": "multiple-choice",
         "question": "Select the synonym for 'Happy'.",
-        "options": [
-          "Sad",
-          "Joyful",
-          "Angry",
-          "Tired"
-        ],
+        "options": ["Sad", "Joyful", "Angry", "Tired"],
         "correctAnswer": "Joyful"
       },
       {
         "id": 2,
         "type": "fill-in-blank",
         "question": "A person who paints is called a ___.",
-        "options": [
-          "Painter",
-          "Doctor",
-          "Teacher",
-          "Driver"
-        ],
+        "options": ["Painter", "Doctor", "Teacher", "Driver"],
         "correctAnswer": "Painter"
       }
     ]
