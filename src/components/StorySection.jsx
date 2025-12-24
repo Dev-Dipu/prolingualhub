@@ -230,7 +230,7 @@ const StorySection = () => {
                 ref={textContainerRef}
                 className="absolute bottom-0 left-0 w-full h-1/2 flex items-center justify-center px-6 pointer-events-none pb-20"
             >
-                <div ref={textRef} className="max-w-3xl text-center">
+                <div ref={textRef} className="max-w-lg text-center">
                     <p className="text-lg md:text-3xl font-bold leading-relaxed uppercase tracking-wide">
                         IRINA MOVED TO THE UK OVER 26 YEARS AGO WITH NO ENGLISH.
                         SHE KNOWS FIRST-HAND HOW CONFUSING, FRUSTRATING, AND
