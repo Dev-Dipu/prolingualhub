@@ -7,65 +7,62 @@ import Image from "next/image";
 gsap.registerPlugin(ScrollTrigger);
 
 const StorySection = () => {
-    const containerRef = useRef(null);
-    const titleRef = useRef(null);
-    const imageWrapperRef = useRef(null);
-    const arrowRef = useRef(null);
-    const textRef = useRef(null);
-    const textContainerRef = useRef(null);
+  const containerRef = useRef(null);
+  const titleRef = useRef(null);
+  const imageWrapperRef = useRef(null);
+  const arrowRef = useRef(null);
+  const textRef = useRef(null);
+  const textContainerRef = useRef(null);
 
-    useEffect(() => {
-        const isMobile = window.innerWidth < 768;
-        let ctx = gsap.context(() => {
-            // --- SETUP ---
-            const titleWords = titleRef.current.querySelectorAll(".word");
-            gsap.set(titleWords, { yPercent: 120, opacity: 0 }); // Hidden initially
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    let ctx = gsap.context(() => {
+      // --- SETUP ---
+      const titleWords = titleRef.current.querySelectorAll(".word");
+      gsap.set(titleWords, { yPercent: 120, opacity: 0 }); // Hidden initially
 
-            // Split text into words and wrap each in a span
-            const textContent = textRef.current.textContent;
-            textRef.current.innerHTML = textContent
-                .split(" ")
-                .map(
-                    (word) =>
-                        `<span class="word-item md:text-xl">${word} </span>`
-                )
-                .join("");
+      // Split text into words and wrap each in a span
+      const textContent = textRef.current.textContent;
+      textRef.current.innerHTML = textContent
+        .split(" ")
+        .map((word) => `<span class="word-item md:text-xl">${word} </span>`)
+        .join("");
 
-            const words = textRef.current.querySelectorAll(".word-item");
+      const words = textRef.current.querySelectorAll(".word-item");
 
-            // Text setup: Start way below viewport, fully visible container
-            gsap.set(textRef.current, {
-                y: window.innerHeight * 0.6, // Start much lower
-                opacity: 1,
-            });
+      // Text setup: Start way below viewport, fully visible container
+      gsap.set(textRef.current, {
+        y: window.innerHeight * 0.6, // Start much lower
+        opacity: 1,
+      });
 
-            gsap.set(words, {
-                color: "#A2A2A2",
-            });
+      gsap.set(words, {
+        color: "#A2A2A2",
+      });
 
-            // MAIN TIMELINE
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top top",
-                    end: "+=600%", // Extended for smooth line-by-line reveal
-                    pin: true,
-                    scrub: 1,
-                    anticipatePin: 1,
-                },
-            });
+      // MAIN TIMELINE
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=600%", // Extended for smooth line-by-line reveal
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+        },
+      });
 
-            // --- STEP 0: TITLE REVEAL (Fast, as we pin) ---
-            tl.to(titleWords, {
-                yPercent: 0,
-                opacity: 1,
-                duration: 0.5,
-                stagger: 0.02,
-                ease: "power2.out",
-            });
+      // --- STEP 0: TITLE REVEAL (Fast, as we pin) ---
+      tl.to(titleWords, {
+        yPercent: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.02,
+        ease: "power2.out",
+      });
 
-            // Hold title for a brief moment
-            tl.to({}, { duration: 0.2 });
+      // Hold title for a brief moment
+      tl.to({}, { duration: 0.2 });
 
             // --- STEP 1: MOVE VISUALS UP (Clear space for text) ---
             // Move Title OUT (Up)
@@ -91,94 +88,96 @@ const StorySection = () => {
                 "moveUp"
             );
 
-            // Move Image & Arrow UP and Shrink slightly
-            tl.to(
-                [imageWrapperRef.current, arrowRef.current],
-                {
-                    y: -window.innerHeight * (isMobile ? 0.2 : 0.35),
-                    scale: 0.8,
-                    rotation: 0,
-                    duration: 1,
-                    ease: "power2.inOut",
-                },
-                "moveUp"
-            );
+      // Move Image & Arrow UP and Shrink slightly
+      tl.to(
+        [imageWrapperRef.current, arrowRef.current],
+        {
+          y: -window.innerHeight * (isMobile ? 0.2 : 0.35),
+          scale: 0.8,
+          rotation: 0,
+          duration: 1,
+          ease: "power2.inOut",
+        },
+        "moveUp",
+      );
 
-            // --- STEP 2: TEXT SLOWLY RISES + TURNS RED + FADES ---
-            // All happening simultaneously for smooth continuous motion
-            tl.to(
-                textRef.current,
-                {
-                    y: isMobile ? "-40px" : "40px", // Move all the way up
-                    duration: 4, // Long duration for smooth scroll
-                    ease: "linear",
-                },
-                "textReveal"
-            );
+      // --- STEP 2: TEXT SLOWLY RISES + TURNS RED + FADES ---
+      // All happening simultaneously for smooth continuous motion
+      tl.to(
+        textRef.current,
+        {
+          y: isMobile ? "-40px" : "40px", // Move all the way up
+          duration: 4, // Long duration for smooth scroll
+          ease: "linear",
+        },
+        "textReveal",
+      );
 
-            // --- STEP 3: TURN RED (Word by word as text rises) ---
-            tl.to(
-                words,
-                {
-                    color: "#DC2626", // Turn Red
-                    duration: 3, // Shorter so red completes before fade
-                    stagger: 0.25, // Word by word
-                    ease: "none",
-                },
-                "textReveal" // Start at same time as text rises
-            );
-        }, containerRef);
+      // --- STEP 3: TURN RED (Word by word as text rises) ---
+      tl.to(
+        words,
+        {
+          color: "#DC2626", // Turn Red
+          duration: 3, // Shorter so red completes before fade
+          stagger: 0.25, // Word by word
+          ease: "none",
+        },
+        "textReveal", // Start at same time as text rises
+      );
+    }, containerRef);
 
-        return () => ctx.revert();
-    }, []);
+    return () => ctx.revert();
+  }, []);
 
-    const renderTitle = (text) => {
-        return text.split(" ").map((word, i) => (
-            <span
-                key={i}
-                className="inline-block overflow-hidden align-bottom mr-2 md:mr-4 pb-2"
-            >
-                <span className="word inline-block transform-gpu leading-none">
-                    {word}
-                </span>
-            </span>
-        ));
-    };
+  const renderTitle = (text) => {
+    return text.split(" ").map((word, i) => (
+      <span
+        key={i}
+        className="inline-block overflow-hidden align-bottom mr-2 md:mr-4 pb-2"
+      >
+        <span className="word inline-block transform-gpu leading-none">
+          {word}
+        </span>
+      </span>
+    ));
+  };
 
-    return (
-        <div
-            ref={containerRef}
-            className="h-screen w-full bg-whitey flex flex-col items-center pt-24 font-[dm_mono] overflow-hidden relative"
-        >
-            {/* Title Wrapper */}
-            <div
-                ref={titleRef}
-                className="text-center px-4 z-20 w-full max-w-6xl mx-auto absolute top-24 left-0 right-0"
-            >
-                <h2 className="text-4xl md:text-7xl font-bold text-blacky uppercase leading-none tracking-tight flex flex-wrap justify-center">
-                    {renderTitle("The Story Behind")}
-                </h2>
-                <h2 className="text-4xl md:text-7xl font-bold text-blacky uppercase leading-none tracking-tight flex flex-wrap justify-center">
-                    {renderTitle("Prolingual Hub")}
-                </h2>
+  return (
+    <div
+      ref={containerRef}
+      className="h-screen w-full bg-whitey flex flex-col items-center pt-24 font-[dm_mono] overflow-hidden relative"
+    >
+      {/* Title Wrapper */}
+      <div
+        ref={titleRef}
+        className="text-center px-4 z-20 w-full max-w-6xl mx-auto absolute top-24 left-0 right-0"
+      >
+        <h2 className="text-4xl md:text-7xl font-bold text-blacky uppercase leading-none tracking-tight flex flex-wrap justify-center">
+          {renderTitle("The Story Behind")}
+        </h2>
+        <h2 className="text-4xl md:text-7xl font-bold text-blacky uppercase leading-none tracking-tight flex flex-wrap justify-center">
+          {renderTitle("Prolingual Hub")}
+        </h2>
+      </div>
+
+      {/* Central Content (Images) */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none mt-10 md:mt-56">
+        <div className="relative">
+          {/* Polaroid Image */}
+          <div
+            ref={imageWrapperRef}
+            className="relative bg-white p-3 pb-12 shadow-[0_10px_30px_rgba(0,0,0,0.1)] -rotate-3 w-64 md:w-80 border border-gray-100 will-change-transform"
+          >
+            <div className="w-full aspect-3/4 bg-gray-200 overflow-hidden relative grayscale opacity-90">
+              <Image
+                width={622}
+                height={415}
+                src="/profilepic.jpg"
+                alt="Irina"
+                className="w-full h-full object-cover"
+              />
             </div>
-
-            {/* Central Content (Images) */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none mt-10 md:mt-56">
-                <div className="relative">
-                    {/* Polaroid Image */}
-                    <div
-                        ref={imageWrapperRef}
-                        className="relative bg-white p-3 pb-12 shadow-[0_10px_30px_rgba(0,0,0,0.1)] -rotate-3 w-64 md:w-80 border border-gray-100 will-change-transform"
-                    >
-                        <div className="w-full aspect-3/4 bg-gray-200 overflow-hidden relative grayscale opacity-90">
-                            <Image width={622} height={415}
-                                src="/profilepic.jpg"
-                                alt="Irina"
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                    </div>
+          </div>
 
                     {/* Arrow Element */}
                     <div
