@@ -80,6 +80,17 @@ const StorySection = () => {
                 "moveUp"
             );
 
+            // Move Arrow OUT (Up)
+            tl.to(
+                arrowRef.current,
+                {
+                    xPercent: -25,
+                    duration: 1,
+                    ease: "power2.inOut",
+                },
+                "moveUp"
+            );
+
             // Move Image & Arrow UP and Shrink slightly
             tl.to(
                 [imageWrapperRef.current, arrowRef.current],
@@ -172,9 +183,9 @@ const StorySection = () => {
                     {/* Arrow Element */}
                     <div
                         ref={arrowRef}
-                        className="absolute top-10 right-4 md:top-20 md:right-1/4 translate-x-8 md:translate-x-32 flex flex-col items-center z-20 will-change-transform"
+                        className="absolute top-10 right-4 md:top-20 md:right-[8%] translate-x-8 md:translate-x-32 flex flex-col items-center z-20 will-change-transform"
                     >
-                        <span className="font-[family-name:var(--font-supfont)] text-redy text-2xl md:text-4xl -rotate-12 mb-2 translate-x-12">
+                        <span className="font-[family-name:var(--font-supfont)] text-redy text-2xl md:text-4xl -rotate-6 mb-2 translate-x-12">
                             meet irina
                         </span>
                         <svg className="scale-175"
