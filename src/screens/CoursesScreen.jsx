@@ -101,7 +101,7 @@ const CoursesScreen = () => {
             {courses.map((course, index) => (
               <div
                 key={index}
-                className="group bg-whitey border border-gray-200 rounded-2xl
+                className="group bg-whitey border max-h-[550px] border-gray-200 rounded-2xl
   p-5 flex flex-col h-full
   shadow-[0_1px_6px_rgba(0,0,0,0.04)]
   hover:shadow-[0_10px_20px_-8px_rgba(220,38,38,0.22)]
