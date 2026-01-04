@@ -26,7 +26,7 @@ export default function PrivateLessonPage() {
 
       try {
         const dateString = selectedDate.toISOString().split("T")[0];
-        const response = await api.get(`/availability?date=${dateString}`);
+        const response = await api.get(`/api/availability?date=${dateString}`);
 
         if (response.data.success) {
           setAvailableSlots(response.data.data);
@@ -139,7 +139,9 @@ export default function PrivateLessonPage() {
 
                   {loading ? (
                     <div className="flex items-center justify-center py-8">
-                      <div className="text-gray-500 text-sm">Loading available times...</div>
+                      <div className="text-gray-500 text-sm">
+                        Loading available times...
+                      </div>
                     </div>
                   ) : (
                     <TimeSlotSelector

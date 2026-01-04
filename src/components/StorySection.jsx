@@ -175,7 +175,7 @@ const StorySection = () => {
                             <Image
                                 width={622}
                                 height={415}
-                                src="/profilepic.jpg"
+                                src="/profilepic.png"
                                 alt="Irina"
                                 className="w-full h-full object-cover"
                             />

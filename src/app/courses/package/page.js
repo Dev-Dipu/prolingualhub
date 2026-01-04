@@ -39,7 +39,7 @@ export default function PackagePage() {
 
       try {
         const dateString = currentDate.toISOString().split("T")[0];
-        const response = await api.get(`/availability?date=${dateString}`);
+        const response = await api.get(`/api/availability?date=${dateString}`);
 
         if (response.data.success) {
           setAvailableTimeSlots(response.data.data);
@@ -104,6 +104,7 @@ export default function PackagePage() {
       sessionDates: sessionDates,
       startTime: startTime,
       endTime: endTime,
+      slots: selectedSlots,
     };
 
     sessionStorage.setItem("bookingData", JSON.stringify(bookingData));

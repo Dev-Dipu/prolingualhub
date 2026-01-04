@@ -27,7 +27,7 @@ export async function GET(request) {
     if (!dateParam) {
       return Response.json(
         { success: false, error: "Date parameter is required" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -36,7 +36,7 @@ export async function GET(request) {
     if (!dateRegex.test(dateParam)) {
       return Response.json(
         { success: false, error: "Invalid date format. Use YYYY-MM-DD" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -45,7 +45,7 @@ export async function GET(request) {
     if (isNaN(targetDate.getTime())) {
       return Response.json(
         { success: false, error: "Invalid date" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -65,24 +65,16 @@ export async function GET(request) {
         $gte: new Date(targetDate),
         $lt: new Date(targetDate.getTime() + 24 * 60 * 60 * 1000),
       },
-    }).select("startTime");
+    }).select("startTime endTime");
 
-    // Add workshop times to occupied slots
-    workshops.forEach((workshop) => {
-      occupiedSlots.add(workshop.startTime);
-    });
-
-    // Query bookings for the target date (check sessionDates array)
+    // Query bookings for the target date
+    // We check if sessionDates array contains a date that falls within our target range
     const bookings = await Booking.find({
       sessionDates: {
-        $in: [targetDate.toISOString().split("T")[0]],
+        $gte: new Date(targetDate),
+        $lt: new Date(targetDate.getTime() + 24 * 60 * 60 * 1000),
       },
-    }).select("startTime");
-
-    // Add booking times to occupied slots
-    bookings.forEach((booking) => {
-      occupiedSlots.add(booking.startTime);
-    });
+    }).select("startTime endTime");
 
     // Query unavailability for the target date
     const unavailabilities = await IrinaUnavailability.find({
@@ -90,16 +82,28 @@ export async function GET(request) {
         $gte: new Date(targetDate),
         $lt: new Date(targetDate.getTime() + 24 * 60 * 60 * 1000),
       },
-    }).select("startTime");
+    }).select("startTime endTime");
 
-    // Add unavailability times to occupied slots
-    unavailabilities.forEach((unavailability) => {
-      occupiedSlots.add(unavailability.startTime);
-    });
+    // Helper to add range of slots
+    const blockSlots = (startTime, endTime) => {
+      let startHour = parseInt(startTime.split(":")[0]);
+      let endHour = parseInt(endTime.split(":")[0]);
+      // If minutes > 0, we might need to block the next hour too depending on business rules,
+      // but assuming strict 1-hour slots starting on the hour:
+      // If an event is 10:00 - 12:00, we block 10:00 and 11:00.
 
-    // Filter available slots (remove occupied ones from default slots)
+      for (let h = startHour; h < endHour; h++) {
+        occupiedSlots.add(`${h.toString().padStart(2, "0")}:00`);
+      }
+    };
+
+    workshops.forEach((w) => blockSlots(w.startTime, w.endTime));
+    bookings.forEach((b) => blockSlots(b.startTime, b.endTime));
+    unavailabilities.forEach((u) => blockSlots(u.startTime, u.endTime));
+
+    // Filter available slots
     const availableSlots = DEFAULT_TIME_SLOTS.filter(
-      (slot) => !occupiedSlots.has(slot),
+      (slot) => !occupiedSlots.has(slot)
     );
 
     return Response.json({ success: true, data: availableSlots });
@@ -107,7 +111,7 @@ export async function GET(request) {
     console.error("Error fetching availability:", error);
     return Response.json(
       { success: false, error: "Failed to fetch availability" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
