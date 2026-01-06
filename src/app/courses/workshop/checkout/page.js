@@ -11,7 +11,7 @@ export default function WorkshopCheckoutPage() {
   const workshopData = {
     title: "MONTHLY ENGLISH WORKSHOP",
     description:
-      "DIVE INTO HANDS-ON LEARNING! OUR WORKSHOP LETS CURIOUS MINDS EXPLORE, EXPERIMENT, AND EXCEL IN [SPECIFIC FIELD/TOPIC], WHETHER YOU'RE A BEGINNER OR AIMING TO SHARPEN YOUR SKILLS.",
+      "DIVE INTO HANDS-ON LEARNING! OUR WORKSHOP LETS CURIOUS MINDS EXPLORE, EXPERIMENT, AND EXCEL IN [SPECIFIC FIELD/TOPIC], WHETHER YOU'RE A BEGINNER OR AIMING TO SHARPEN YOUR SKILLS. Master workplace communication through our interactive 5 Senses Learning Technique.",
     date: "08 OCT 2025",
     time: "10:00 - 11:00 AM",
     timezone: "GMT",

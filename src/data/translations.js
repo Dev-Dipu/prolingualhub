@@ -13,8 +13,8 @@ export const translations = {
     },
     blurRevealText: {
       items: [
-        "book workshop based on 6 senses",
-        "book individual sessions based on 6 senses",
+        "book workshop based on 5 senses",
+        "book individual sessions based on 5 senses",
         "contact us",
       ],
     },

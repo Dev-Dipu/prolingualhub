@@ -48,10 +48,10 @@ export default function WorkshopPage() {
             price: 68, // Keep fixed price for now
             seatsLeft: workshop.capacity || 12, // Use capacity as seats left approximation
             whatYouLearn: [
-              "ENGAGE IN PRACTICAL SPEAKING ACTIVITIES",
-              "RECEIVE REAL-TIME FEEDBACK FROM THE INSTRUCTOR",
-              "IMPROVE FLUENCY THROUGH THEMED SESSIONS",
-              "SUITABLE FOR ALL LEVELS (A2-B2)",
+              "Communication Fundamentals",
+              "Industry Language & Real-World Practice",
+              "AI Communication Tools",
+              "Professional Etiquette & Culture",
             ],
             aboutWorkshop: workshop.description || "DIVE INTO HANDS-ON LEARNING! OUR WORKSHOP LETS CURIOUS MINDS EXPLORE, EXPERIMENT, AND EXCEL IN ENGLISH, WHETHER YOU'RE A BEGINNER OR AIMING TO SHARPEN YOUR SKILLS.",
             workshopId: workshop._id, // Store for booking
@@ -169,10 +169,14 @@ export default function WorkshopPage() {
 
               <ul className="space-y-3">
                 {workshopData.whatYouLearn.map((item, i) => (
-                  <li key={i} className="flex gap-2 text-[14px] text-gray-600">
-                    <span>•</span>
-                    <span>{item}</span>
-                  </li>
+                  
+                  <li
+                      key={i}
+                      className="text-[11px] md:text-xs text-gray-500 flex items-start gap-2 font-medium leading-snug"
+                    >
+                      <span className="mt-1 block w-2 h-2 scale-90 bg-gray-400 rounded-[2px] shrink-0" />
+                      <span className="block">{item}</span>
+                    </li>
                 ))}
               </ul>
             </div>

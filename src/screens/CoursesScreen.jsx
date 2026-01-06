@@ -113,9 +113,9 @@ const CoursesScreen = () => {
                     {course.title}
                   </h2>
 
-                  <div className="bg-redy p-1.5 rounded-lg shadow-sm shrink-0">
+                  {/* <div className="bg-redy p-1.5 rounded-lg shadow-sm shrink-0">
                     {course.icon}
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Tag */}
