@@ -98,7 +98,7 @@ export default function BookingForm({ onSubmit, isLoading = false }) {
         </label>
 
         <PhoneInput
-          country="in"
+          country="gb"
           value={formData.phone}
           onChange={(phone) => setFormData({ ...formData, phone })}
           inputStyle={{
