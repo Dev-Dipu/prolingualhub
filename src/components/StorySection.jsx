@@ -164,20 +164,20 @@ const StorySection = () => {
             </div>
 
             {/* Central Content (Images) */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none mt-10 md:mt-56">
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-10 mt-10 md:mt-56">
                 <div className="relative">
                     {/* Polaroid Image */}
                     <div
                         ref={imageWrapperRef}
                         className="relative bg-white p-3 pb-12 shadow-[0_10px_30px_rgba(0,0,0,0.1)] -rotate-3 w-64 md:w-80 border border-gray-100 will-change-transform"
                     >
-                        <div className="w-full aspect-3/4 bg-gray-200 overflow-hidden relative grayscale opacity-90">
+                        <div className="w-full aspect-3/4 bg-gray-200 overflow-hidden relative">
                             <Image
                                 width={622}
                                 height={415}
-                                src="/profilepic.jpg"
+                                src="/profile.webp"
                                 alt="Irina"
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover grayscale hover:grayscale-0 hover:cursor-pointer transition-all duration-500"
                             />
                         </div>
                     </div>

@@ -31,7 +31,7 @@ function SmoothScrolling({ children }) {
       ref={lenisRef}
       autoRaf={false}
       options={{
-        lerp: 0.12,          // smoothness (0.1 - 0.15 sweet spot)
+        lerp: 0.15,          // smoothness (0.1 - 0.15 sweet spot)
         wheelMultiplier: 1.6, // same scroll pe zyada move
         touchMultiplier: 1.8, // mobile smooth
         smoothWheel: true,
