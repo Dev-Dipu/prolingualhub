@@ -37,7 +37,7 @@ const MainContent = () => {
         onClick={() => {
           router.push("/assessment");
         }}
-        className="text-redy border border-redy hover:bg-redy hover:text-white transition-colors duration-300 py-2 px-4 rounded-md cursor-pointer fixed bottom-5 right-5 z-50 uppercase"
+        className="text-redy border border-redy hover:bg-redy hover:text-white transition-colors duration-300 py-2 px-4 rounded-md cursor-pointer fixed bottom-5 right-5 z-50 uppercase md:text-md text-sm"
       >
         prolingualhub
       </button>

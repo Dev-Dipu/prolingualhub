@@ -12,7 +12,7 @@ export default function LanguageDropdown() {
       {/* Button */}
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-200 rounded-md shadow-sm hover:shadow-md transition text-gray-500 font-medium tracking-wide text-xs cursor-pointer"
+        className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-200 rounded-sm shadow-sm hover:shadow-md transition text-gray-500 font-medium tracking-wide text-xs cursor-pointer"
       >
         <img
   src="/world.png"
@@ -28,7 +28,7 @@ export default function LanguageDropdown() {
 
       {/* Dropdown */}
       {open && (
-        <div className="mt-1.5 w-40 bg-white border border-gray-200 rounded-md shadow-md">
+        <div className="mt-1.5 w-40 bg-white border border-gray-200 rounded-sm shadow-md">
           {languages.map((lang) => (
             <div
               key={lang}

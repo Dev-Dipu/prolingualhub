@@ -124,7 +124,7 @@ const Footer = () => {
       </div>
 
       {/* Contact Info */}
-      <div className="absolute font-normal bottom-10 left-4 md:left-10 text-gray-500 text-xs md:text-base space-y-1">
+      <div className="absolute font-normal bottom-6 left-4 md:left-10 text-gray-500 text-xs md:text-base space-y-1">
         <p>{t.footer.contact.email}</p>
         <p>{t.footer.contact.phone}</p>
         <p>{t.footer.contact.linkedin}</p>

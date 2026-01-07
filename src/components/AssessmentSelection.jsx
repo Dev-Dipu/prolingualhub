@@ -35,14 +35,14 @@ const AssessmentSelection = ({ onStart }) => {
 
   return (
     <div className="flex flex-col items-center justify-center h-full w-full max-w-5xl mx-auto px-4">
-      <h1 className="text-3xl md:text-5xl font-semibold mb-4 text-center">
+      <h1 className="text-[22px] md:text-5xl font-semibold mb-4 text-center">
         Complete English Skill Assessment
       </h1>
-      <p className="text-lg text-gray-500 mb-12 text-center">
+      <p className="text-xs md:text-lg text-gray-500 mb-12 text-center">
         Choose a test to start your assessment.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:w-3/4 mb-12">
         {options.map((option) => (
           <div
             key={option.id}
@@ -65,7 +65,7 @@ const AssessmentSelection = ({ onStart }) => {
         ))}
       </div>
 
-      <div className="flex justify-end w-full mb-8 md:mb-0">
+      <div className="md:flex justify-end w-full mb-8 md:mb-0">
         <button
           onClick={handleStart}
           disabled={selectedTypes.length === 0}

@@ -79,7 +79,7 @@ const BlurRevealText = ({ items: propItems }) => {
           key={index}
           className="text-section h-screen flex items-center justify-center px-4"
         >
-          <h2 className="w-full md:w-1/2 leading-none text-4xl md:text-8xl font-bold text-black text-center uppercase">
+          <h2 className="w-4/5 md:w-1/2 leading-none text-3xl md:text-8xl font-bold text-black text-center uppercase">
             {item.split("\n").map((line, lineIndex) => (
               <div key={lineIndex} className="block">
                 {line.split(" ").map((word, wordIndex) => (

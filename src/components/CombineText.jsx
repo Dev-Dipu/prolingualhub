@@ -21,129 +21,6 @@ const CombineText = () => {
       const words = textRef.current.querySelectorAll(".word");
 
       mm.add("(min-width: 768px)", () => {
-        // Desktop Animation
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "+=300%", // Increased scroll distance
-            scrub: 1,
-            pin: true,
-          },
-        });
-
-        // Initial scattered states (Desktop)
-        // All these start at time 0 and end at time 1 (default duration 0.5, but we can sync them)
-        // We want them to finish halfway through the scroll.
-        // So we'll set duration: 1 for all, and start at 0.
-        // Then the next animation starts at 1.
-
-        const scatterConfig = { duration: 1 };
-
-        tl.from(
-          words[0],
-          {
-            xPercent: -150,
-            yPercent: -150,
-            filter: "blur(7.5px)",
-            opacity: 0.8,
-            ...scatterConfig,
-          },
-          0,
-        );
-        tl.from(
-          words[2],
-          {
-            xPercent: 150,
-            yPercent: -100,
-            filter: "blur(7.5px)",
-            opacity: 0.8,
-            ...scatterConfig,
-          },
-          0,
-        );
-        tl.from(
-          words[3],
-          {
-            xPercent: 200,
-            yPercent: 50,
-            filter: "blur(7.5px)",
-            opacity: 0.8,
-            ...scatterConfig,
-          },
-          0,
-        );
-        tl.from(
-          words[4],
-          {
-            xPercent: -150,
-            yPercent: 150,
-            filter: "blur(7.5px)",
-            opacity: 0.8,
-            ...scatterConfig,
-          },
-          0,
-        );
-        tl.from(
-          words[5],
-          {
-            yPercent: 200,
-            filter: "blur(7.5px)",
-            opacity: 0.8,
-            ...scatterConfig,
-          },
-          0,
-        );
-        tl.from(
-          words[6],
-          {
-            xPercent: 150,
-            yPercent: 150,
-            filter: "blur(7.5px)",
-            opacity: 0.8,
-            ...scatterConfig,
-          },
-          0,
-        );
-
-        // Arrow and CTA Animation
-        // Starts after text assembly (at time 1)
-        tl.fromTo(
-          ctaTextRef.current,
-          { opacity: 0, scale: 0.8, y: 20 },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 0.5,
-            ease: "back.out(1.7)",
-          },
-          1.2, // Small delay after text assembles
-        );
-
-        tl.fromTo(
-          arrowRef.current,
-          { strokeDashoffset: 1000 }, // Assuming path length is < 1000
-          { strokeDashoffset: 0, duration: 1, ease: "power1.inOut" },
-          1.5, // Start drawing shortly after text appears
-        );
-
-        tl.to(
-          arrowHeadRef.current,
-          { opacity: 1, duration: 0.3 },
-          2.4, // Show arrowhead near end of draw
-        );
-
-        // Fade out everything at the end
-        tl.to(
-          [ctaTextRef.current, arrowRef.current, arrowHeadRef.current],
-          { opacity: 0, duration: 0.5 },
-          3.5, // Start fading out before unpinning
-        );
-      });
-
-      mm.add("(max-width: 767px)", () => {
-        // Mobile Animation
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
@@ -156,102 +33,43 @@ const CombineText = () => {
 
         const scatterConfig = { duration: 1 };
 
-        // Initial scattered states (Mobile)
-        tl.from(
-          words[0],
-          {
-            xPercent: -75,
-            yPercent: -75,
-            filter: "blur(7.5px)",
-            opacity: 0.8,
-            ...scatterConfig,
-          },
-          0,
-        );
-        tl.from(
-          words[2],
-          {
-            xPercent: 75,
-            yPercent: -50,
-            filter: "blur(7.5px)",
-            opacity: 0.8,
-            ...scatterConfig,
-          },
-          0,
-        );
-        tl.from(
-          words[3],
-          {
-            xPercent: 100,
-            yPercent: 25,
-            filter: "blur(7.5px)",
-            opacity: 0.8,
-            ...scatterConfig,
-          },
-          0,
-        );
-        tl.from(
-          words[4],
-          {
-            xPercent: -75,
-            yPercent: 75,
-            filter: "blur(7.5px)",
-            opacity: 0.8,
-            ...scatterConfig,
-          },
-          0,
-        );
-        tl.from(
-          words[5],
-          {
-            yPercent: 100,
-            filter: "blur(7.5px)",
-            opacity: 0.8,
-            ...scatterConfig,
-          },
-          0,
-        );
-        tl.from(
-          words[6],
-          {
-            xPercent: 75,
-            yPercent: 75,
-            filter: "blur(7.5px)",
-            opacity: 0.8,
-            ...scatterConfig,
-          },
-          0,
-        );
+        tl.from(words[0], { xPercent: -150, yPercent: -150, filter: "blur(7.5px)", opacity: 0.8, ...scatterConfig }, 0);
+        tl.from(words[2], { xPercent: 150, yPercent: -100, filter: "blur(7.5px)", opacity: 0.8, ...scatterConfig }, 0);
+        tl.from(words[3], { xPercent: 200, yPercent: 50, filter: "blur(7.5px)", opacity: 0.8, ...scatterConfig }, 0);
+        tl.from(words[4], { xPercent: -150, yPercent: 150, filter: "blur(7.5px)", opacity: 0.8, ...scatterConfig }, 0);
+        tl.from(words[5], { yPercent: 200, filter: "blur(7.5px)", opacity: 0.8, ...scatterConfig }, 0);
+        tl.from(words[6], { xPercent: 150, yPercent: 150, filter: "blur(7.5px)", opacity: 0.8, ...scatterConfig }, 0);
 
-        // Arrow and CTA Animation (Mobile)
-        tl.fromTo(
-          ctaTextRef.current,
-          { opacity: 0, scale: 0.8, y: 20 },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 0.5,
-            ease: "back.out(1.7)",
-          },
-          1.2,
-        );
-
-        tl.fromTo(
-          arrowRef.current,
-          { strokeDashoffset: 1000 },
-          { strokeDashoffset: 0, duration: 1, ease: "power1.inOut" },
-          1.5,
-        );
-
+        tl.fromTo(ctaTextRef.current, { opacity: 0, scale: 0.8, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" }, 1.2);
+        tl.fromTo(arrowRef.current, { strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 1, ease: "power1.inOut" }, 1.5);
         tl.to(arrowHeadRef.current, { opacity: 1, duration: 0.3 }, 2.4);
+        tl.to([ctaTextRef.current, arrowRef.current, arrowHeadRef.current], { opacity: 0, duration: 0.5 }, 3.5);
+      });
 
-        // Fade out everything at the end (Mobile)
-        tl.to(
-          [ctaTextRef.current, arrowRef.current, arrowHeadRef.current],
-          { opacity: 0, duration: 0.5 },
-          3.5,
-        );
+      mm.add("(max-width: 767px)", () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "+=300%",
+            scrub: 1,
+            pin: true,
+          },
+        });
+
+        const scatterConfig = { duration: 1 };
+
+        tl.from(words[0], { xPercent: -75, yPercent: -75, filter: "blur(7.5px)", opacity: 0.8, ...scatterConfig }, 0);
+        tl.from(words[2], { xPercent: 75, yPercent: -50, filter: "blur(7.5px)", opacity: 0.8, ...scatterConfig }, 0);
+        tl.from(words[3], { xPercent: 100, yPercent: 25, filter: "blur(7.5px)", opacity: 0.8, ...scatterConfig }, 0);
+        tl.from(words[4], { xPercent: -75, yPercent: 75, filter: "blur(7.5px)", opacity: 0.8, ...scatterConfig }, 0);
+        tl.from(words[5], { yPercent: 100, filter: "blur(7.5px)", opacity: 0.8, ...scatterConfig }, 0);
+        tl.from(words[6], { xPercent: 75, yPercent: 75, filter: "blur(7.5px)", opacity: 0.8, ...scatterConfig }, 0);
+
+        tl.fromTo(ctaTextRef.current, { opacity: 0, scale: 0.8, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" }, 1.2);
+        tl.fromTo(arrowRef.current, { strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 1, ease: "power1.inOut" }, 1.5);
+        tl.to(arrowHeadRef.current, { opacity: 1, duration: 0.3 }, 2.4);
+        tl.to([ctaTextRef.current, arrowRef.current, arrowHeadRef.current], { opacity: 0, duration: 0.5 }, 3.5);
       });
     }, containerRef);
 
@@ -259,31 +77,19 @@ const CombineText = () => {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="h-screen w-full flex items-center justify-center overflow-hidden uppercase"
-    >
+    <div ref={containerRef} className="h-screen w-full flex items-center justify-center overflow-hidden uppercase">
       <div
         ref={textRef}
-        className="flex flex-col items-center justify-center text-5xl md:text-7xl font-bold text-black leading-tight text-center"
+        className="flex flex-wrap justify-center text-3xl md:text-7xl font-bold text-black leading-tight text-center max-w-sm md:max-w-6xl"
       >
-        <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-4 gap-y-2 leading-tight">
-          {t.combineText.line1.map((word, index) => (
-            <span key={`line1-${index}`} className="word inline-block">
-              {word}
-            </span>
-          ))}
-        </div>
-        <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-4 gap-y-2 leading-none">
-          {t.combineText.line2.map((word, index) => (
-            <span key={`line2-${index}`} className="word inline-block">
-              {word}
-            </span>
-          ))}
-        </div>
+        {[...t.combineText.line1, ...t.combineText.line2].map((word, index) => (
+          <span key={index} className="word inline-block mx-1 md:mx-2">
+            {word}
+          </span>
+        ))}
       </div>
 
-      {/* CTA SECTION */}
+      {/* CTA SECTION (unchanged) */}
       <div className="absolute bottom-16 right-22 flex flex-col items-end pointer-events-none z-20">
         <div
           ref={ctaTextRef}

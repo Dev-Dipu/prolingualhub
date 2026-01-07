@@ -18,23 +18,23 @@ const Assessment = ({ onStart, onJoinWorkshop }) => {
           <ChevronLeft className="w-6 h-6 text-gray-500" />
         </button>
       </div>
-      <h1 className="text-4xl md:text-7xl font-semibold text-center px-4">
+      <h1 className="text-[22px] md:text-7xl font-semibold text-center px-4 leading-none">
         Check your English level
       </h1>
-      <p className="text-lg md:text-2xl font-medium w-11/12 md:w-1/2 text-center text-[#818181]">
+      <p className="text-xs md:text-2xl font-medium w-3/4 md:w-2/3 text-center text-[#818181]">
         Check your English level and see how well you perform across Grammar,
         Vocabulary and Speaking ability.
       </p>
-      <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-2 font-semibold w-full px-4 md:w-auto md:px-0">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-8 font-semibold w-full px-7 md:w-auto md:px-0 text-sm md:text-base">
         <button
           onClick={onStart}
-          className="bg-redy text-white py-3 px-6 md:py-2 md:px-4 rounded-md cursor-pointer hover:bg-red-700 transition-colors w-full md:w-auto"
+          className="bg-redy text-white py-2.5 px-6 md:py-2 md:px-4 rounded-md cursor-pointer hover:bg-red-700 transition-colors w-full md:w-auto"
         >
           Start Assessment
         </button>
         <button
           onClick={onJoinWorkshop}
-          className="text-redy border border-redy hover:bg-red-50 transition-colors py-3 px-6 md:py-2 md:px-4 rounded-md cursor-pointer w-full md:w-auto text-center"
+          className="text-redy border border-redy hover:bg-red-50 transition-colors py-2.5 px-6 md:py-2 md:px-4 rounded-md cursor-pointer w-full md:w-auto text-center"
         >
           Start Learning
         </button>
