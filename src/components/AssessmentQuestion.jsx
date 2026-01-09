@@ -87,13 +87,9 @@ const AssessmentQuestion = ({
 
     return (
         <div className="w-full max-w-3xl mx-auto px-4 flex flex-col h-full py-6 relative">
-            <div className="absolute top-6 left-0 hidden md:block">
+            
                 <BackButton onBack={handleBack} />
-            </div>
-            <div className="absolute top-2 left-4 md:hidden z-10">
-                <BackButton onBack={handleBack} />
-            </div>
-
+            
             {/* Progress Bar */}
             <div className="shrink-0 mt-8 md:mt-4">
                 <div className="flex justify-between text-[10px] md:text-sm font-medium mb-2">

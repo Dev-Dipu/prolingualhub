@@ -132,25 +132,22 @@ export default function WorkshopPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD] font-[dm_mono]">
-      <div className="mx-auto flex flex-col h-screen max-w-[1240px] px-6 py-8">
+    <div className="h-dvh bg-[#FDFDFD] font-[dm_mono]">
+      <div className="mx-auto flex flex-col md:h-screen max-w-[1240px] md:px-6 px-12 py-8">
         <BackButton />
 
         {/* HEADER */}
         <div className="mt-6 max-w-3xl">
-          <h1 className="text-[30px] font-bold uppercase text-black leading-tight">
-            {workshopData.title}{" "}
-            <span className="text-[15px] font-normal text-gray-500">
-              {workshopData.duration}
-            </span>
+          <h1 className="md:text-[30px] text-[22px] font-bold uppercase text-black leading-tight md:text-left text-center">
+            {workshopData.title}
           </h1>
 
-          <p className="mt-2 text-[15px] text-gray-500">
+          <p className="mt-2 md:text-[15px] text-xs md:text-left text-center text-gray-500">
             {workshopData.description}
           </p>
 
-          <div className="mt-4 inline-flex items-center gap-2 rounded-md border border-gray-200 px-3 py-2 text-[14px] text-gray-600">
-            <Calendar className="h-4 w-4" />
+          <div className="mt-4 inline-flex items-center gap-2 rounded-md border border-gray-200 px-3 py-2 md:text-[14px] text-[10px] text-gray-600 ">
+            <Calendar className="md:h-4 md:w-4 h-3 w-3" />
             <span>
               {workshopData.date} · {workshopData.time} ({workshopData.timezone}
               )
@@ -181,7 +178,7 @@ export default function WorkshopPage() {
               </ul>
             </div>
 
-            <div className="border-t border-gray-200 mx-6" />
+            <div className="border-t border-gray-200 mx-6 mt-4" />
 
             <div className="p-6">
               <h2 className="text-[15px] font-bold uppercase text-black mb-4">

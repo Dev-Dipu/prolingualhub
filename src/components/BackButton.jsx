@@ -2,24 +2,24 @@
 import { useRouter } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 
-export default function BackButton({ onBack }) {
-  const router = useRouter();
+export default function BackButton({ onBack, className = "" }) {
+    const router = useRouter();
 
-  const handleBack = () => {
-    if (onBack) {
-      onBack();
-    } else {
-      router.back();
-    }
-  };
+    const handleBack = () => {
+        if (onBack) {
+            onBack();
+        } else {
+            router.back();
+        }
+    };
 
-  return (
-    <button
-      onClick={handleBack}
-      className="mb-4 md:mb-8 p-2 -ml-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer inline-flex items-center w-fit"
-      aria-label="Go back"
-    >
-      <ChevronLeft className="w-6 h-6 text-gray-500" />
-    </button>
-  );
+    return (
+        <button
+            onClick={handleBack}
+            className={`fixed top-4 left-4 md:top-8 md:left-8 z-50 p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer inline-flex items-center ${className}`}
+            aria-label="Go back"
+        >
+            <ChevronLeft className="w-6 h-6 text-[#1C1C1C]" />
+        </button>
+    );
 }

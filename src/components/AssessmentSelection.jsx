@@ -37,15 +37,10 @@ const AssessmentSelection = ({ onStart, onBack }) => {
 
     return (
         <div className="flex flex-col items-center pt-12 md:pt-0 md:justify-center h-dvh w-full max-w-5xl mx-auto px-7 relative">
-            <div className="absolute top-8 left-0 hidden md:block">
                 <BackButton onBack={onBack} />
-            </div>
             {/* Mobile back button needs to be visible too, usually top left. Main container has pt-12 on mobile which might conflict.
            Let's just put it absolute. top-4 left-4 for mobile.
         */}
-            <div className="absolute top-4 left-4 md:hidden">
-                <BackButton onBack={onBack} />
-            </div>
 
             <h1 className="text-[22px] md:text-5xl font-semibold mb-4 text-center">
                 Complete English Skill Assessment

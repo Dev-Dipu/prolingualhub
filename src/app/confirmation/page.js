@@ -42,13 +42,13 @@ export default function ConfirmationPage() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-whitey font-[dm_mono] flex items-center justify-center px-4">
-      <div className="w-full max-w-[520px] bg-white border border-gray-200 rounded-2xl px-8 py-10">
+    <div className="h-dvh w-full bg-whitey font-[dm_mono] flex items-center justify-center px-8">
+      <div className="w-full max-w-[520px] bg-white border border-gray-200 rounded-2xl px-8 py-10 my-10">
         {/* ICON */}
-        <div className="flex justify-center mb-6">
-          <div className="w-14 h-14 rounded-full bg-pink-100 flex items-center justify-center">
+        <div className="flex justify-center md:mb-6 mb-4">
+          <div className="md:w-14 md:h-14 w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center">
             <svg
-              className="w-7 h-7 text-redy"
+              className="md:w-7 md:h-7 w-5 h-5 text-redy"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -64,17 +64,17 @@ export default function ConfirmationPage() {
         </div>
 
         {/* TITLE */}
-        <h1 className="text-[22px] font-bold uppercase text-center text-blacky tracking-wide">
+        <h1 className="md:text-[22px] text-[18px] font-bold uppercase text-center text-blacky tracking-wide">
           This Event Is Scheduled
         </h1>
 
-        <p className="mt-2 text-center text-[14px] text-gray-500 leading-relaxed">
+        <p className="mt-2 md:text-[14px] text-[12px] text-center text-gray-500 leading-relaxed">
           We sent an email with a calendar invitation with the details to
           everyone.
         </p>
 
         {/* DIVIDER */}
-        <div className="my-8 border-t border-gray-200" />
+        <div className="md:my-8 my-4 border-t border-gray-200" />
 
         {/* DETAILS */}
         <div className="space-y-6">

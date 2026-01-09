@@ -28,8 +28,8 @@ export default function WorkshopCheckoutPage() {
   };
 
   return (
-    <div className="bg-[#FDFDFD] font-[dm_mono]">
-      <div className="mx-auto h-screen flex flex-col max-w-[1240px] px-6 py-8">
+    <div className="h-dvh bg-[#FDFDFD] font-[dm_mono]">
+      <div className="mx-auto md:h-screen flex flex-col md:items-center md:justify-center max-w-[1240px] pt-16 md:pt-0 px-6 py-8">
         <BackButton />
 
         {/* OUTER CARD */}
@@ -62,7 +62,7 @@ export default function WorkshopCheckoutPage() {
                   </div>
 
                   <div className="mt-2 text-[13px] flex gap-2 items-center">
-                    <Clock className="h-4 w-4 " /> {workshopData.duration}
+                    <Clock className="h-4 w-4 " /> {workshopData.duration}  
                   </div>
                 </div>
               </div>

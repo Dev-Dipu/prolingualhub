@@ -2,17 +2,16 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, Calendar, User, Layers } from "lucide-react";
+import BackButton from "@/components/BackButton";
 
 const CoursesScreen = () => {
   const router = useRouter();
 
-  const handleBack = () => {
-    router.back();
-  };
 
   const courses = [
     {
-      title: "MONTHLY ENGLISH WORKSHOP (1 HOUR)",
+      title: "MONTHLY ENGLISH WORKSHOP",
+      dets: "(1 HOUR)",
       tag: "LIVE GROUP LEARNING!",
       icon: <Calendar className="w-5 h-5 text-white" />,
       description:
@@ -32,7 +31,8 @@ const CoursesScreen = () => {
       route: "/courses/workshop",
     },
     {
-      title: "PRIVATE 1:1 LESSON (1 HOUR)",
+      title: "PRIVATE 1:1 LESSON",
+      dets: "(1 HOUR)",
       tag: "PERSONAL COACHING!",
       icon: <User className="w-5 h-5 text-white" />,
       description: "A Personalised Session Built Around Your Goals.",
@@ -49,7 +49,8 @@ const CoursesScreen = () => {
       route: "/courses/private-lesson",
     },
     {
-      title: "PRIVATE LESSON PACKAGE (4 LESSONS)",
+      title: "PRIVATE LESSON PACKAGE",
+      dets: "(4 LESSONS)",
       tag: "BEST VALUE!",
       icon: <Layers className="w-5 h-5 text-white" />,
       description:
@@ -71,22 +72,17 @@ const CoursesScreen = () => {
   ];
 
   return (
-    <div className="h-dvh w-full bg-whitey font-[dm_mono] flex flex-col overflow-hidden animate-in fade-in duration-500 selection:bg-redy selection:text-whitey">
+    <div className="h-dvh w-full bg-whitey font-[dm_mono] flex flex-col overflow-hidden animate-in fade-in duration-500 selection:bg-redy selection:text-whitey relative">
+      {/* Back Button */}
+          <div className="sticky top-0 z-50">
+            <BackButton />
+          </div>
       {/* Scrollable Content */}
       <div className="flex-1 overflow-y-auto md:overflow-hidden w-full">
-        <div className="max-w-7xl mx-auto p-4 md:p-8 min-h-full flex flex-col">
-          {/* Back Button */}
-          <div>
-            <button
-              onClick={handleBack}
-              className="mb-4 md:mb-8 p-2 -ml-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer inline-flex items-center"
-            >
-              <ChevronLeft className="w-6 h-6 text-gray-500" />
-            </button>
-          </div>
+        <div className="max-w-7xl mx-auto p-4 px-12 md:p-8 min-h-full flex flex-col">
 
           {/* Header */}
-          <div className="text-center mb-10 md:mb-14 space-y-2 md:space-y-4 px-4 shrink-0">
+          <div className="text-center mt-8 md:mt-10 mb-10 md:mb-14 space-y-2 md:space-y-4 px-4 shrink-0">
             <h1 className="text-2xl md:text-4xl font-bold text-blacky uppercase tracking-tight leading-tight">
               CHOOSE HOW YOU WANT TO LEARN.
             </h1>
@@ -110,7 +106,8 @@ const CoursesScreen = () => {
                 {/* Header */}
                 <div className="flex justify-between items-start mb-3">
                   <h2 className="text-base md:text-lg font-bold leading-snug w-3/4 uppercase">
-                    {course.title}
+                    {course.title} {" "}
+                    <span className="text-nowrap">{course.dets}</span>
                   </h2>
 
                   {/* <div className="bg-redy p-1.5 rounded-lg shadow-sm shrink-0">
