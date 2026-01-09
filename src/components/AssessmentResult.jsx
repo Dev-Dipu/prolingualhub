@@ -25,34 +25,34 @@ const AssessmentResult = ({ scores, onRetake, onJoinWorkshop }) => {
     const getIcon = (id) => {
         switch (id) {
             case "grammar":
-                return <BookOpen className="w-6 h-6 text-redy" />;
+                return <BookOpen className="md:w-6 md:h-6 w-4 h-4 text-redy" />;
             case "vocabulary":
-                return <Type className="w-6 h-6 text-redy" />;
+                return <Type className="md:w-6 md:h-6 w-4 h-4 text-redy" />;
             case "speaking":
-                return <Mic className="w-6 h-6 text-redy" />;
+                return <Mic className="md:w-6 md:h-6 w-4 h-4 text-redy" />;
             default:
-                return <BookOpen className="w-6 h-6 text-redy" />;
+                return <BookOpen className="md:w-6 md:h-6 w-4 h-4  text-redy" />;
         }
     };
 
     return (
-        <div className="w-full h-full flex justify-center flex-col max-w-4xl mx-auto px-4 py-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-center mb-2">
+        <div className="w-full h-full flex justify-center flex-col max-w-4xl mx-auto px-7 py-8">
+            <h1 className="text-[22px] md:text-4xl font-bold text-center mb-2">
                 Assessment Complete!
             </h1>
-            <p className="text-gray-500 text-center leading-tight mb-12 max-w-lg mx-auto">
+            <p className="text-gray-500 text-xs md:text-base text-center leading-tight mb-12 max-w-xs md:max-w-lg mx-auto">
                 Congratulations on completing your English assessment. Here are
                 your result and personalized recommendations.
             </p>
 
             {/* Main Result Card */}
-            <div className="bg-whitey rounded-2xl border border-red-100 p-4 md:p-6 md:pl-8 md:py-2 flex md:flex-row items-center justify-between shadow-sm md:mb-12 mb-8">
+            <div className="bg-whitey rounded-sm py-2 px-4 md:p-6 md:pl-8 flex md:flex-row items-center justify-between shadow-sm md:mb-12 mb-8">
                 <div className="flex-1">
-                    <p className="text-gray-500 mb-2">Your English Level</p>
-                    <h2 className="text-4xl font-bold text-redy mb-4">
+                    <p className="text-gray-500 mb-1 md:mb-2 text-[8px] md:text-base">Your English Level</p>
+                    <h2 className="md:text-4xl font-bold text-redy mb-1 md:mb-4">
                         {level}
                     </h2>
-                    <p className="text-gray-500 text-sm leading-tight w-4/5 hidden md:block">
+                    <p className="text-gray-500 text-[6px] md:text-sm leading-tight w-4/5">
                         You have a solid foundation, with the ability to
                         understand the main points on familiar matters.
                     </p>
@@ -60,7 +60,7 @@ const AssessmentResult = ({ scores, onRetake, onJoinWorkshop }) => {
 
                 {/* Abstract Illustration Placeholder */}
                 <div className="flex-1 flex justify-center items-center">
-                    <div className="relative w-fit md:w-58 h-30 md:h-40">
+                    <div className="relative w-fit md:w-58 h-24 md:h-40">
                         {/* Simple abstract drawing using SVG */}
                         <svg viewBox="0 0 200 150" className="w-full h-full">
                             <path
@@ -126,19 +126,21 @@ const AssessmentResult = ({ scores, onRetake, onJoinWorkshop }) => {
             </div>
 
             {/* Detailed Breakdown */}
-            <h3 className="text-xl font-bold mb-6">Detailed Score Breakdown</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 mb-12">
+            <h3 className="text-sm md:text-xl font-bold mb-4.5 md:mb-6">Detailed Score Breakdown</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6 mb-12">
                 {Object.entries(scores).map(([key, data]) => (
                     <div
                         key={key}
-                        className="bg-whitey p-4 md:p-6 rounded-xl border border-gray-100 shadow-sm"
+                        className="bg-whitey p-4 md:p-6 rounded-sm border border-gray-100 shadow-sm"
                     >
-                        <div className="mb-4">{getIcon(key)}</div>
-                        <h4 className="font-bold md:text-lg mb-2">
+                        <div className="flex items-center gap-2 mb-2">
+                            <div className="">{getIcon(key)}</div>
+                        <h4 className="font-bold text-sm md:text-lg ">
                             {data.title}
                         </h4>
+                        </div>
                         <div className="flex items-end gap-1 mb-2">
-                            <span className="text-sm text-gray-400">
+                            <span className="text-[8px] md:text-sm text-gray-400">
                                 {Math.round((data.score / data.total) * 100)}
                                 /100
                             </span>
@@ -156,16 +158,16 @@ const AssessmentResult = ({ scores, onRetake, onJoinWorkshop }) => {
             </div>
 
             {/* Actions */}
-            <div className="flex flex-col md:flex-row justify-end gap-4 pb-8 md:pb-0">
+            <div className="flex flex-col md:flex-row justify-end gap-4 mt-auto">
                 <button
                     onClick={onRetake}
-                    className="px-8 py-3 rounded-md border border-red-200 text-redy font-semibold hover:bg-red-50 transition-colors cursor-pointer w-full md:w-auto text-center"
+                    className="px-8 py-3 rounded-sm border border-red-200 text-redy font-semibold hover:bg-red-50 transition-colors cursor-pointer w-full md:w-auto text-center text-sm md:text-base"
                 >
                     Retake Test
                 </button>
                 <button
                     onClick={onJoinWorkshop}
-                    className="px-8 py-3 rounded-md bg-redy text-white font-semibold hover:bg-red-700 transition-colors cursor-pointer w-full md:w-auto text-center"
+                    className="px-8 py-3 rounded-sm bg-redy text-white font-semibold hover:bg-red-700 transition-colors cursor-pointer w-full md:w-auto text-center text-sm md:text-base"
                 >
                     Start Learning
                 </button>

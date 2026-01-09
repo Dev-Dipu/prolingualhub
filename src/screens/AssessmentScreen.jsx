@@ -70,7 +70,7 @@ const AssessmentScreen = () => {
         setStep("question");
     };
 
-    const handleQuestionComplete = (score, isSectionComplete) => {
+    const handleSectionComplete = (sectionScore) => {
         const currentType = selectedTypes[currentTypeIndex];
 
         if (!assessmentData[currentType]) return;
@@ -79,17 +79,15 @@ const AssessmentScreen = () => {
             ...prev,
             [currentType]: {
                 title: assessmentData[currentType].title,
-                score: (prev[currentType]?.score || 0) + score,
+                score: sectionScore,
                 total: assessmentData[currentType].questions.length,
             },
         }));
 
-        if (isSectionComplete) {
-            if (currentTypeIndex < selectedTypes.length - 1) {
-                setCurrentTypeIndex((prev) => prev + 1);
-            } else {
-                setStep("result");
-            }
+        if (currentTypeIndex < selectedTypes.length - 1) {
+            setCurrentTypeIndex((prev) => prev + 1);
+        } else {
+            setStep("result");
         }
     };
 
@@ -115,6 +113,18 @@ const AssessmentScreen = () => {
                 setCurrentTypeIndex((prev) => prev + 1);
             } else {
                 setStep("result");
+            }
+        }
+    };
+
+    const handleBack = () => {
+        if (step === "selection") {
+            setStep("intro");
+        } else if (step === "question") {
+            if (currentTypeIndex > 0) {
+                setCurrentTypeIndex((prev) => prev - 1);
+            } else {
+                setStep("selection");
             }
         }
     };
@@ -188,7 +198,10 @@ const AssessmentScreen = () => {
                 )}
 
                 {step === "selection" && (
-                    <AssessmentSelection onStart={handleSelectionComplete} />
+                    <AssessmentSelection
+                        onStart={handleSelectionComplete}
+                        onBack={handleBack}
+                    />
                 )}
 
                 {step === "question" &&
@@ -198,8 +211,8 @@ const AssessmentScreen = () => {
                         <AssessmentQuestion
                             key={currentType}
                             data={assessmentData[currentType]}
-                            onNext={handleQuestionComplete}
-                            onSkip={handleSkip}
+                            onComplete={handleSectionComplete}
+                            onBack={handleBack}
                             totalQuestions={totalQuestions}
                             completedQuestionsCount={completedQuestionsCount}
                         />
@@ -219,7 +232,12 @@ const AssessmentScreen = () => {
                                     updated.
                                 </p>
                                 <button
-                                    onClick={() =>{currentTypeIndex < selectedTypes.length - 1 ? handleSkip(true) : router.push("/courses")}}
+                                    onClick={() => {
+                                        currentTypeIndex <
+                                        selectedTypes.length - 1
+                                            ? handleSkip(true)
+                                            : router.push("/courses");
+                                    }}
                                     className="px-6 py-3 bg-redy text-whitey rounded-lg font-bold hover:bg-red-600 transition-colors uppercase tracking-widest cursor-pointer"
                                 >
                                     {currentTypeIndex < selectedTypes.length - 1

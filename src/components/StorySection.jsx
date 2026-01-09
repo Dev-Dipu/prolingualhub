@@ -233,7 +233,7 @@ const StorySection = () => {
                 ref={textContainerRef}
                 className="absolute bottom-0 left-0 w-full h-1/2 flex items-center justify-center px-6 pointer-events-none pb-20"
             >
-                <div ref={textRef} className="max-w-xl text-center uppercase text-sm md:text-3xl">
+                <div ref={textRef} className="max-w-xl text-center uppercase text-sm md:text-2xl md:leading-none">
                     <p className="font-bold leading-relaxed uppercase tracking-wide">
                         Irina is the founder of ProLingual Hub Ltd, a UK-based company delivering fast, practical English courses for non-native professionals. Having moved to the UK over 26 years ago with no English, she experienced the challenges of learning a new language firsthand. With two degrees in education and a background in public service, she created the “5 Senses” method, blending sensory learning, workplace communication, cultural etiquette, and GPT-powered tools to help learners gain fluency with confidence and ease.
                     </p>

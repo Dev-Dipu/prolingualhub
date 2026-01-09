@@ -10,12 +10,12 @@ const Assessment = ({ onStart, onJoinWorkshop }) => {
   return (
     <div className="flex h-full items-center justify-center flex-col gap-4 max-w-7xl mx-auto p-4 md:p-8 relative">
       {/* Back Button */}
-      <div className="absolute top-8 left-8">
+      <div className="absolute top-8 left-7">
         <button
           onClick={handleBack}
           className="mb-4 md:mb-8 p-2 -ml-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer inline-flex items-center"
         >
-          <ChevronLeft className="w-6 h-6 text-gray-500" />
+          <ChevronLeft className="w-6 h-6 text-[#1C1C1C]" />
         </button>
       </div>
       <h1 className="text-[22px] md:text-7xl font-semibold text-center px-4 leading-none">
@@ -25,16 +25,16 @@ const Assessment = ({ onStart, onJoinWorkshop }) => {
         Check your English level and see how well you perform across Grammar,
         Vocabulary and Speaking ability.
       </p>
-      <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-8 font-semibold w-full px-7 md:w-auto md:px-0 text-sm md:text-base">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-3.5 mt-4 font-semibold w-full px-7 md:w-auto md:px-0 text-sm md:text-base">
         <button
           onClick={onStart}
-          className="bg-redy text-white py-2.5 px-6 md:py-2 md:px-4 rounded-md cursor-pointer hover:bg-red-700 transition-colors w-full md:w-auto"
+          className="bg-redy text-white py-2.5 px-6 md:py-2 md:px-4 rounded-sm cursor-pointer hover:bg-red-700 transition-colors w-full md:w-auto uppercase"
         >
           Start Assessment
         </button>
         <button
           onClick={onJoinWorkshop}
-          className="text-redy border border-redy hover:bg-red-50 transition-colors py-2.5 px-6 md:py-2 md:px-4 rounded-md cursor-pointer w-full md:w-auto text-center"
+          className="text-redy border border-redy hover:bg-red-50 transition-colors py-2.5 px-6 md:py-2 md:px-4 rounded-sm cursor-pointer w-full md:w-auto text-center uppercase"
         >
           Start Learning
         </button>

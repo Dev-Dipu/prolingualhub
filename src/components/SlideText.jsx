@@ -125,7 +125,7 @@ const SlideText = () => {
       tl.to(
         lastLine,
         {
-          scale: 8.2,
+          scale: 6,
           duration: 2,
           ease: "power2.inOut",
           transformOrigin: "center center",
