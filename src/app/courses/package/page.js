@@ -40,12 +40,12 @@ export default function PackagePage() {
             try {
                 // Format date manually to YYYY-MM-DD to avoid timezone shifts
                 // This ensures what the user sees/selects is exactly what is sent to the API
-                const year = selectedDate.getFullYear();
-                const month = String(selectedDate.getMonth() + 1).padStart(
+                const year = currentDate.getFullYear();
+                const month = String(currentDate.getMonth() + 1).padStart(
                     2,
                     "0"
                 );
-                const day = String(selectedDate.getDate()).padStart(2, "0");
+                const day = String(currentDate.getDate()).padStart(2, "0");
                 const dateString = `${year}-${month}-${day}`;
                 const response = await api.get(
                     `/api/availability?date=${dateString}`
@@ -117,6 +117,8 @@ export default function PackagePage() {
             sessionDates: sessionDates,
             startTime: startTime,
             endTime: endTime,
+            price: courseData.price,
+            slots: selectedSlots,
         };
 
         sessionStorage.setItem("bookingData", JSON.stringify(bookingData));
