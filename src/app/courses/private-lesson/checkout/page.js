@@ -29,7 +29,7 @@ export default function PrivateLessonCheckoutPage() {
 
   return (
     <div className="bg-[#FDFDFD] font-[dm_mono]">
-      <div className="mx-auto h-screen flex flex-col max-w-[1240px] px-6 py-8">
+      <div className="mx-auto mt-6 md:h-screen flex flex-col max-w-[1240px] px-6 py-8">
         <BackButton />
 
         {/* OUTER CARD */}

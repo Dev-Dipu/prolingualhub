@@ -191,7 +191,7 @@ const StorySection = () => {
                             meet irina
                         </span>
                         <svg
-                            className="scale-175"
+                            className="md:scale-175 scale-125"
                             width="46"
                             height="45"
                             viewBox="0 0 46 45"

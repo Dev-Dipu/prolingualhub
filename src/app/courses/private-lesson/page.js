@@ -81,8 +81,8 @@ export default function PrivateLessonPage() {
     };
 
     return (
-        <div className="h-screen bg-[#FDFDFD] font-[dm_mono]">
-            <div className="mx-auto h-[90%] flex flex-col max-w-[1240px] px-6 py-8">
+        <div className="md:h-screen bg-[#FDFDFD] font-[dm_mono]">
+            <div className="mx-auto md:h-[90%] flex flex-col max-w-[1240px] px-6 py-8">
                 <BackButton />
 
                 {/* MAIN CONTAINER */}

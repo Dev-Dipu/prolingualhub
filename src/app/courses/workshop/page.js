@@ -184,7 +184,7 @@ export default function WorkshopPage() {
               <h2 className="text-[15px] font-bold uppercase text-black mb-4">
                 About the Workshop
               </h2>
-              <p className="text-[14px] leading-relaxed text-gray-600">
+              <p className="md:text-[14px] text-xs leading-relaxed text-gray-600">
                 {workshopData.aboutWorkshop}
               </p>
             </div>

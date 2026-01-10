@@ -148,11 +148,11 @@ export default function PackagePage() {
     };
 
     return (
-        <div className="h-screen bg-[#FDFDFD] font-[dm_mono]">
+        <div className="md:h-screen bg-[#FDFDFD] font-[dm_mono]">
             <div className="h-[90%] max-w-[1280px] mx-auto px-6 py-6 flex flex-col">
                 <BackButton />
 
-                <div className="flex-1 rounded-2xl border border-gray-200 bg-white overflow-hidden">
+                <div className="mt-6 flex-1 rounded-2xl border border-gray-200 bg-white overflow-hidden">
                     <div className="h-full grid grid-cols-1 lg:grid-cols-[280px_1fr_340px]">
                         {/* LEFT INFO */}
                         <div className="p-6 border-r border-gray-200">
