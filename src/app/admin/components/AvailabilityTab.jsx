@@ -28,18 +28,8 @@ import { Plus, Trash2, CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { adminApi } from "@/lib/axios";
 
-// Available time slots (9 AM to 5 PM, 1-hour blocks)
-const TIME_SLOTS = [
-  "09:00",
-  "10:00",
-  "11:00",
-  "12:00",
-  "13:00",
-  "14:00",
-  "15:00",
-  "16:00",
-  "17:00",
-];
+// Available time slots (Strict Schedule)
+const TIME_SLOTS = ["09:00", "10:15", "11:30", "13:00", "14:15", "15:30"];
 
 export default function AvailabilityTab() {
   const [unavailabilities, setUnavailabilities] = useState([]);

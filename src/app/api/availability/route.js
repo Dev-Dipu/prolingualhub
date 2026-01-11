@@ -3,17 +3,14 @@ import Workshop from "@/models/Workshop";
 import Booking from "@/models/Booking";
 import IrinaUnavailability from "@/models/IrinaUnavailability";
 
-// Default available time slots (9 AM to 5 PM, 1-hour blocks)
+// Default available time slots (Strict Schedule)
 const DEFAULT_TIME_SLOTS = [
   "09:00",
-  "10:00",
-  "11:00",
-  "12:00",
+  "10:15",
+  "11:30",
   "13:00",
-  "14:00",
-  "15:00",
-  "16:00",
-  "17:00",
+  "14:15",
+  "15:30",
 ];
 
 export async function GET(request) {
@@ -27,7 +24,7 @@ export async function GET(request) {
     if (!dateParam) {
       return Response.json(
         { success: false, error: "Date parameter is required" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -36,7 +33,7 @@ export async function GET(request) {
     if (!dateRegex.test(dateParam)) {
       return Response.json(
         { success: false, error: "Invalid date format. Use YYYY-MM-DD" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -45,11 +42,17 @@ export async function GET(request) {
     if (isNaN(targetDate.getTime())) {
       return Response.json(
         { success: false, error: "Invalid date" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
-        // Don't show availability for past dates (Strict GMT)
+    // STRICT AVAILABILITY: Only Mondays (1) and Tuesdays (2)
+    const dayOfWeek = targetDate.getUTCDay();
+    if (dayOfWeek !== 1 && dayOfWeek !== 2) {
+      return Response.json({ success: true, data: [] });
+    }
+
+    // Don't show availability for past dates (Strict GMT)
     const now = new Date();
     const todayUTC = new Date(
       Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
@@ -103,7 +106,7 @@ export async function GET(request) {
 
     // Filter available slots (remove occupied ones from default slots)
     const availableSlots = DEFAULT_TIME_SLOTS.filter(
-      (slot) => !occupiedSlots.has(slot),
+      (slot) => !occupiedSlots.has(slot)
     );
 
     return Response.json({ success: true, data: availableSlots });
@@ -111,7 +114,7 @@ export async function GET(request) {
     console.error("Error fetching availability:", error);
     return Response.json(
       { success: false, error: "Failed to fetch availability" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
