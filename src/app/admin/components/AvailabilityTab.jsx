@@ -11,13 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   Table,
   TableBody,
   TableCell,
@@ -55,7 +48,9 @@ export default function AvailabilityTab() {
   const [error, setError] = useState("");
   const [showDialog, setShowDialog] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedSlots, setSelectedSlots] = useState([]);
+  const [isFullDay, setIsFullDay] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -85,7 +80,7 @@ export default function AvailabilityTab() {
     try {
       const dateString = format(date, "yyyy-MM-dd");
       const response = await adminApi.get(
-        `/api/availability?date=${dateString}`,
+        `/api/availability?date=${dateString}`
       );
       setAvailableSlots(response.data.data);
     } catch (err) {
@@ -95,8 +90,13 @@ export default function AvailabilityTab() {
   };
 
   const handleCreateUnavailability = async () => {
-    if (!selectedDate || !selectedTime) {
-      setError("Please select both date and time");
+    if (!selectedDate) {
+      setError("Please select a date");
+      return;
+    }
+
+    if (!isFullDay && selectedSlots.length === 0) {
+      setError("Please select at least one time slot or mark Full Day");
       return;
     }
 
@@ -105,17 +105,15 @@ export default function AvailabilityTab() {
     try {
       await adminApi.post("/api/admin/unavailability", {
         date: dateString,
-        startTime: selectedTime,
-        endTime: selectedTime.replace(/^\d{2}/, (match) => {
-          const hour = parseInt(match) + 1;
-          return hour.toString().padStart(2, "0");
-        }),
+        isFullDay,
+        slots: isFullDay ? [] : selectedSlots,
       });
 
       await fetchData();
       setShowDialog(false);
       setSelectedDate(null);
-      setSelectedTime("");
+      setSelectedSlots([]);
+      setIsFullDay(false);
     } catch (err) {
       setError(err.userMessage || "Failed to create unavailability");
       console.error("Error creating unavailability:", err);
@@ -169,7 +167,8 @@ export default function AvailabilityTab() {
                 <Button
                   onClick={() => {
                     setSelectedDate(null);
-                    setSelectedTime("");
+                    setSelectedSlots([]);
+                    setIsFullDay(false);
                     setError("");
                   }}
                 >
@@ -181,16 +180,19 @@ export default function AvailabilityTab() {
                 <DialogHeader>
                   <DialogTitle>Add Unavailability Block</DialogTitle>
                 </DialogHeader>
-                <div className="space-y-4">
+                <div className="space-y-6">
                   {error && (
                     <div className="p-3 bg-red-50 border border-red-200 rounded-md">
                       <p className="text-red-600 text-sm">{error}</p>
                     </div>
                   )}
 
-                  <div>
+                  <div className="space-y-2">
                     <Label>Select Date</Label>
-                    <Popover>
+                    <Popover
+                      open={isCalendarOpen}
+                      onOpenChange={setIsCalendarOpen}
+                    >
                       <PopoverTrigger asChild>
                         <Button
                           variant="outline"
@@ -208,7 +210,9 @@ export default function AvailabilityTab() {
                           selected={selectedDate}
                           onSelect={async (date) => {
                             setSelectedDate(date);
-                            setSelectedTime("");
+                            setSelectedSlots([]);
+                            setIsFullDay(false);
+                            setIsCalendarOpen(false); // Close calendar
                             await fetchAvailableSlots(date);
                           }}
                           disabled={(date) => date < new Date()}
@@ -218,38 +222,76 @@ export default function AvailabilityTab() {
                     </Popover>
                   </div>
 
-                  <div>
-                    <Label>Select Time Slot</Label>
-                    <Select
-                      value={selectedTime}
-                      onValueChange={setSelectedTime}
-                      disabled={!selectedDate}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Choose available time" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {availableSlots.map((slot) => (
-                          <SelectItem key={slot} value={slot}>
-                            {formatTime(slot)} -{" "}
-                            {formatTime(
-                              slot.replace(/^\d{2}/, (match) => {
-                                const hour = parseInt(match) + 1;
-                                return hour.toString().padStart(2, "0");
-                              }),
-                            )}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    {selectedDate && availableSlots.length === 0 && (
-                      <p className="text-sm text-red-600 mt-1">
-                        No available slots for this date
-                      </p>
-                    )}
-                  </div>
+                  {selectedDate && (
+                    <>
+                      <div className="flex items-center space-x-2 border p-3 rounded-md bg-gray-50">
+                        <input
+                          type="checkbox"
+                          id="fullDay"
+                          className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                          checked={isFullDay}
+                          onChange={(e) => {
+                            setIsFullDay(e.target.checked);
+                            if (e.target.checked) setSelectedSlots([]);
+                          }}
+                        />
+                        <Label
+                          htmlFor="fullDay"
+                          className="cursor-pointer font-medium"
+                        >
+                          Mark Full Day Unavailable
+                        </Label>
+                      </div>
 
-                  <div className="flex justify-end gap-3 pt-4">
+                      {!isFullDay && (
+                        <div className="space-y-3">
+                          <Label>Select Time Slots (Click to toggle)</Label>
+                          <div className="grid grid-cols-3 gap-2">
+                            {TIME_SLOTS.map((slot) => {
+                              const isSelected = selectedSlots.includes(slot);
+                              // Check if slot is already unavailable (not in availableSlots)
+                              // But wait, our API logic is specific.
+                              // availableSlots only returns FREE slots.
+                              // If a slot is not in availableSlots, it's already booked/unavailable.
+                              // So we should visually disable it or mark it.
+                              const isBooked = !availableSlots.includes(slot);
+
+                              return (
+                                <Button
+                                  key={slot}
+                                  type="button"
+                                  variant={isSelected ? "default" : "outline"}
+                                  className={`h-9 text-xs ${isBooked ? "opacity-50 cursor-not-allowed bg-gray-100" : ""}`}
+                                  disabled={isBooked}
+                                  onClick={() => {
+                                    if (isSelected) {
+                                      setSelectedSlots((prev) =>
+                                        prev.filter((s) => s !== slot)
+                                      );
+                                    } else {
+                                      setSelectedSlots((prev) => [
+                                        ...prev,
+                                        slot,
+                                      ]);
+                                    }
+                                  }}
+                                >
+                                  {formatTime(slot)}
+                                </Button>
+                              );
+                            })}
+                          </div>
+                          {availableSlots.length === 0 && (
+                            <p className="text-xs text-red-500">
+                              No slots available for this date.
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  <div className="flex justify-end gap-3 pt-2">
                     <Button
                       type="button"
                       variant="outline"
@@ -259,9 +301,12 @@ export default function AvailabilityTab() {
                     </Button>
                     <Button
                       onClick={handleCreateUnavailability}
-                      disabled={!selectedDate || !selectedTime}
+                      disabled={
+                        !selectedDate ||
+                        (!isFullDay && selectedSlots.length === 0)
+                      }
                     >
-                      Create Block
+                      Create Block{selectedSlots.length > 1 ? "s" : ""}
                     </Button>
                   </div>
                 </div>
@@ -299,7 +344,7 @@ export default function AvailabilityTab() {
                     .sort(
                       (a, b) =>
                         new Date(a.date) - new Date(b.date) ||
-                        a.startTime.localeCompare(b.startTime),
+                        a.startTime.localeCompare(b.startTime)
                     )
                     .map((block) => (
                       <TableRow key={block._id}>
