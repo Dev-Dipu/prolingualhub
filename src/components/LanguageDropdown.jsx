@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const languages = ["ENGLISH", "RUSSIAN", "CHINESE", "ARABIC", "DEUTSCH", "日本語"];
+const languages = ["ENGLISH", "RUSSIAN", "ARABIC", "TURKISH"];
 
 export default function LanguageDropdown() {
   const [open, setOpen] = useState(false);
