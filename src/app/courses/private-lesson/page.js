@@ -7,6 +7,8 @@ import CalendarPicker from "@/components/CalendarPicker";
 import TimeSlotSelector from "@/components/TimeSlotSelector";
 import PrimaryButton from "@/components/PrimaryButton";
 import { api } from "@/lib/axios";
+import { Clock } from "lucide-react";
+import Image from "next/image";
 
 export default function PrivateLessonPage() {
     const router = useRouter();
@@ -54,6 +56,7 @@ export default function PrivateLessonPage() {
                 setLoading(false);
             }
         };
+        console.log(selectedDate)
 
         fetchAvailability();
     }, [selectedDate]);
@@ -105,9 +108,15 @@ export default function PrivateLessonPage() {
                             </p>
 
                             <div className="space-y-3 text-[13px] text-gray-500">
-                                <div>1h</div>
-                                <div>Google Meet</div>
-                                <div>Europe/London</div>
+                                <div className="text-[13px] flex gap-2 items-center">
+                                    <Clock className="h-4 w-4 " /> 1h
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <Image width="15" height="15" src="/googlemeet.png" alt="google meet" />
+                                    Google Meet</div>
+                                <div className="flex items-center gap-2">
+                                    <Image width="16" height="16" src="/world.png" alt="world" />
+                                    Europe/London</div>
                             </div>
                         </div>
 
@@ -127,7 +136,7 @@ export default function PrivateLessonPage() {
                                     {/* HEADER */}
                                     <div className="flex items-center justify-between mb-4">
                                         <p className="text-[14px] font-semibold">
-                                            Thu {selectedDate.getDate()}
+                                            {selectedDate.toLocaleDateString("en-US", { weekday: "short" })} {selectedDate.getDate()}
                                         </p>
 
                                         <div className="flex border border-gray-200 rounded-md overflow-hidden text-[11px]">

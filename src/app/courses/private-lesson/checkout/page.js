@@ -4,11 +4,12 @@ import { useRouter } from "next/navigation";
 import BackButton from "@/components/BackButton";
 import BookingForm from "@/components/BookingForm";
 import { Clock } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function PrivateLessonCheckoutPage() {
   const router = useRouter();
 
-  const privateLessonData = {
+  const [privateLessonData, setPrivateLessonData] = useState({
     title: "Private english lessons - 1 hour",
     description:
       "One-hour private English lessons designed to improve your speaking, confidence, and overall communication with personalized guidance.",
@@ -17,7 +18,7 @@ export default function PrivateLessonCheckoutPage() {
     timezone: "GMT",
     duration: "1h",
     price: 58,
-  };
+  })
 
   const handleSubmit = (formData) => {
     sessionStorage.setItem(
@@ -26,6 +27,17 @@ export default function PrivateLessonCheckoutPage() {
     );
     router.push("/confirmation");
   };
+
+  useEffect(() => {
+    const bookingData = sessionStorage.getItem("bookingData");
+    if (!bookingData) {
+      router.push("/");
+    }
+    const bookingDataParsed = JSON.parse(bookingData);
+    setPrivateLessonData({ ...privateLessonData, date: new Date(bookingDataParsed.sessionDates[0]).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }).replace(/ /g, " ").toUpperCase(), time: `${new Date(`1970-01-01T${bookingDataParsed.startTime}`).toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",hour12:true})} - ${new Date(`1970-01-01T${bookingDataParsed.endTime}`).toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",hour12:true})}` });
+
+  }, [])
+  
 
   return (
     <div className="bg-[#FDFDFD] font-[dm_mono]">
