@@ -69,8 +69,8 @@ export default function PackageCheckoutPage() {
 
   return (
     <div className="bg-[#FDFDFD] font-[dm_mono]">
-      <div className="mx-auto md:h-screen flex flex-col max-w-[1240px] px-6 py-8">
         <BackButton />
+      <div className="mx-auto md:h-screen flex flex-col items-center justify-center max-w-[1240px] px-6 py-8">
 
         {/* OUTER CARD */}
         <div className="mt-6 rounded-2xl border border-gray-200 bg-white">

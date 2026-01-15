@@ -150,9 +150,9 @@ export default function PackagePage() {
     };
 
     return (
-        <div className="md:h-screen bg-[#FDFDFD] font-[dm_mono]">
-            <div className="h-[90%] max-w-[1280px] mx-auto px-6 py-6 flex flex-col">
-                <BackButton />
+        <div className="md:h-screen flex flex-col items-center justify-center bg-[#FDFDFD] font-[dm_mono]">
+            <BackButton />
+            <div className="h-[90%] w-full max-w-[1280px] mx-auto px-6 py-6 flex flex-col">
 
                 <div className="mt-6 flex-1 rounded-2xl border border-gray-200 bg-white overflow-hidden">
                     <div className="h-full grid grid-cols-1 lg:grid-cols-[280px_1fr_340px]">
