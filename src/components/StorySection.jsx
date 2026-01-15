@@ -121,8 +121,8 @@ const StorySection = () => {
                 words,
                 {
                     color: "#DC2626", // Turn Red
-                    duration: 3, // Shorter so red completes before fade
-                    stagger: 0.25, // Word by word
+                    duration: 1, // Shorter so red completes before fade
+                    stagger: 0.15, // Word by word
                     ease: "none",
                 },
                 "textReveal" // Start at same time as text rises
@@ -164,7 +164,7 @@ const StorySection = () => {
             </div>
 
             {/* Central Content (Images) */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center z-10 mt-10 md:mt-56">
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-10 mt-10 md:mt-56 max-[380px]:scale-75 max-[380px]:mb-10">
                 <div className="relative">
                     {/* Polaroid Image */}
                     <div
@@ -233,7 +233,7 @@ const StorySection = () => {
                 ref={textContainerRef}
                 className="absolute bottom-0 left-0 w-full h-1/2 flex items-center justify-center px-6 pointer-events-none pb-20"
             >
-                <div ref={textRef} className="max-w-xl text-center uppercase text-sm md:text-2xl md:leading-none">
+                <div ref={textRef} className="max-w-xl text-center uppercase text-sm md:text-2xl md:leading-none max-[380px]:text-[10px] max-[380px]:max-w-[90%]">
                     <p className="font-bold leading-relaxed uppercase tracking-wide">
                         Irina is the founder of ProLingual Hub Ltd, a UK-based company delivering fast, practical English courses for non-native professionals. Having moved to the UK over 26 years ago with no English, she experienced the challenges of learning a new language firsthand. With two degrees in education and a background in public service, she created the “5 Senses” method, blending sensory learning, workplace communication, cultural etiquette, and GPT-powered tools to help learners gain fluency with confidence and ease.
                     </p>

@@ -125,10 +125,36 @@ const Footer = () => {
 
       {/* Contact Info */}
       <div className="absolute font-normal bottom-6 left-4 md:left-10 text-gray-500 text-xs md:text-base space-y-1">
-        <p>{t.footer.contact.email}</p>
-        <p>{t.footer.contact.phone}</p>
-        <p>{t.footer.contact.linkedin}</p>
-      </div>
+    <p>
+        <a
+            href="mailto:speaklanguage@prolingualhub.com"
+            className="hover:text-blacky transition-colors"
+        >
+            email
+        </a>
+    </p>
+
+    <p>
+        <a
+            href="tel:+447894994298"
+            className="hover:text-blacky transition-colors"
+        >
+            phone
+        </a>
+    </p>
+
+    <p>
+        <a
+            href="https://linkedin.com/in/irina-statham-238734387"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blacky transition-colors"
+        >
+            linkedin
+        </a>
+    </p>
+</div>
+
     </div>
   );
 };
