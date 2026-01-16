@@ -107,9 +107,13 @@ export default function PackagePage() {
         if (selectedSlots.length !== courseData.maxSlots) return;
 
         // Transform slots to session dates for booking API
-        const sessionDates = selectedSlots.map(
-            (slot) => slot.date.toISOString().split("T")[0]
-        );
+        const sessionDates = selectedSlots.map((slot) => {
+            const date = slot.date;
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, "0");
+            const day = String(date.getDate()).padStart(2, "0");
+            return `${year}-${month}-${day}`;
+        });
 
         // All slots use the same time
         const startTime = selectedSlots[0].time;

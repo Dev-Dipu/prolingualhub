@@ -57,7 +57,7 @@ export default function PrivateLessonPage() {
                 setLoading(false);
             }
         };
-        console.log(selectedDate);
+        // console.log(selectedDate);
 
         fetchAvailability();
     }, [selectedDate]);
@@ -66,9 +66,14 @@ export default function PrivateLessonPage() {
         if (!selectedDate || !selectedTime) return;
 
         // Store booking data in session storage for checkout
+        const year = selectedDate.getFullYear();
+        const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
+        const day = String(selectedDate.getDate()).padStart(2, "0");
+        const dateString = `${year}-${month}-${day}`;
+
         const bookingData = {
             bookingType: "PRIVATE_1_1",
-            sessionDates: [selectedDate.toISOString().split("T")[0]],
+            sessionDates: [dateString],
             startTime: selectedTime,
             endTime: addOneHour(selectedTime),
         };
