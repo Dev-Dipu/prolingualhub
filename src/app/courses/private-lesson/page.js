@@ -6,6 +6,7 @@ import BackButton from "@/components/BackButton";
 import CalendarPicker from "@/components/CalendarPicker";
 import TimeSlotSelector from "@/components/TimeSlotSelector";
 import PrimaryButton from "@/components/PrimaryButton";
+import TimeFormatToggle from "@/components/TimeFormatToggle";
 import { api } from "@/lib/axios";
 import { Clock } from "lucide-react";
 import Image from "next/image";
@@ -56,7 +57,7 @@ export default function PrivateLessonPage() {
                 setLoading(false);
             }
         };
-        console.log(selectedDate)
+        console.log(selectedDate);
 
         fetchAvailability();
     }, [selectedDate]);
@@ -112,11 +113,23 @@ export default function PrivateLessonPage() {
                                     <Clock className="h-4 w-4 " /> 1h
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <Image width="15" height="15" src="/googlemeet.png" alt="google meet" />
-                                    Google Meet</div>
+                                    <Image
+                                        width="15"
+                                        height="15"
+                                        src="/googlemeet.png"
+                                        alt="google meet"
+                                    />
+                                    Google Meet
+                                </div>
                                 <div className="flex items-center gap-2">
-                                    <Image width="16" height="16" src="/world.png" alt="world" />
-                                    Europe/London</div>
+                                    <Image
+                                        width="16"
+                                        height="16"
+                                        src="/world.png"
+                                        alt="world"
+                                    />
+                                    Europe/London
+                                </div>
                             </div>
                         </div>
 
@@ -136,35 +149,17 @@ export default function PrivateLessonPage() {
                                     {/* HEADER */}
                                     <div className="flex items-center justify-between mb-4">
                                         <p className="text-[14px] font-semibold">
-                                            {selectedDate.toLocaleDateString("en-US", { weekday: "short" })} {selectedDate.getDate()}
+                                            {selectedDate.toLocaleDateString(
+                                                "en-US",
+                                                { weekday: "short" }
+                                            )}{" "}
+                                            {selectedDate.getDate()}
                                         </p>
 
-                                        <div className="flex border border-gray-200 rounded-md overflow-hidden text-[11px]">
-                                            <button
-                                                className={`px-3 py-1 ${
-                                                    timeFormat === "12h"
-                                                        ? "bg-gray-100"
-                                                        : ""
-                                                }`}
-                                                onClick={() =>
-                                                    setTimeFormat("12h")
-                                                }
-                                            >
-                                                12h
-                                            </button>
-                                            <button
-                                                className={`px-3 py-1 ${
-                                                    timeFormat === "24h"
-                                                        ? "bg-redy text-white"
-                                                        : ""
-                                                }`}
-                                                onClick={() =>
-                                                    setTimeFormat("24h")
-                                                }
-                                            >
-                                                24h
-                                            </button>
-                                        </div>
+                                        <TimeFormatToggle
+                                            value={timeFormat}
+                                            onChange={setTimeFormat}
+                                        />
                                     </div>
 
                                     {loading ? (
@@ -178,6 +173,7 @@ export default function PrivateLessonPage() {
                                             availableSlots={availableSlots}
                                             selectedSlot={selectedTime}
                                             onSlotSelect={setSelectedTime}
+                                            format={timeFormat}
                                         />
                                     )}
                                 </>

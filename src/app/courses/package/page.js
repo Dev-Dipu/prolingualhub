@@ -6,6 +6,7 @@ import BackButton from "@/components/BackButton";
 import CalendarPicker from "@/components/CalendarPicker";
 import TimeSlotSelector from "@/components/TimeSlotSelector";
 import PrimaryButton from "@/components/PrimaryButton";
+import TimeFormatToggle from "@/components/TimeFormatToggle";
 import { api } from "@/lib/axios";
 import { Clock } from "lucide-react";
 import Image from "next/image";
@@ -140,9 +141,18 @@ export default function PackagePage() {
         return `${days[currentDate.getDay()]} ${currentDate.getDate()}`;
     };
 
+    const formatTime = (time) => {
+        if (timeFormat === "24h") return time;
+        const [hours, minutes] = time.split(":");
+        const h = parseInt(hours, 10);
+        const suffix = h >= 12 ? "PM" : "AM";
+        const h12 = h % 12 || 12;
+        return `${h12}:${minutes} ${suffix}`;
+    };
+
     const formatSlot = (slot) => {
         const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        return `${days[slot.date.getDay()]} ${slot.date.getDate()} • ${slot.time}`;
+        return `${days[slot.date.getDay()]} ${slot.date.getDate()} • ${formatTime(slot.time)}`;
     };
 
     const getDisabledDates = () => {
@@ -153,7 +163,6 @@ export default function PackagePage() {
         <div className="md:h-screen flex flex-col items-center justify-center bg-[#FDFDFD] font-[dm_mono]">
             <BackButton />
             <div className="h-[90%] w-full max-w-[1280px] mx-auto px-6 py-6 flex flex-col">
-
                 <div className="mt-6 flex-1 rounded-2xl border border-gray-200 bg-white overflow-hidden">
                     <div className="h-full grid grid-cols-1 lg:grid-cols-[280px_1fr_340px]">
                         {/* LEFT INFO */}
@@ -170,17 +179,29 @@ export default function PackagePage() {
                                 {courseData.description}
                             </p>
 
-                            
                             <div className="space-y-3 text-[13px] text-gray-500">
                                 <div className="text-[13px] flex gap-2 items-center">
-                                    <Clock className="h-4 w-4 " /> {courseData.duration}
+                                    <Clock className="h-4 w-4 " />{" "}
+                                    {courseData.duration}
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <Image width="15" height="15" src="/googlemeet.png" alt="meet" />
-                                    {courseData.location}</div>
+                                    <Image
+                                        width="15"
+                                        height="15"
+                                        src="/googlemeet.png"
+                                        alt="meet"
+                                    />
+                                    {courseData.location}
+                                </div>
                                 <div className="flex items-center gap-2">
-                                    <Image width="16" height="16" src="/world.png" alt="world" />
-                                    {courseData.timezone}</div>
+                                    <Image
+                                        width="16"
+                                        height="16"
+                                        src="/world.png"
+                                        alt="world"
+                                    />
+                                    {courseData.timezone}
+                                </div>
                             </div>
                         </div>
 
@@ -202,32 +223,10 @@ export default function PackagePage() {
                                                 {formatSelectedDate()}
                                             </p>
 
-                                            <div className="flex border border-gray-200 rounded-md overflow-hidden text-[11px]">
-                                                <button
-                                                    className={`px-3 py-1 ${
-                                                        timeFormat === "12h"
-                                                            ? "bg-gray-100"
-                                                            : ""
-                                                    }`}
-                                                    onClick={() =>
-                                                        setTimeFormat("12h")
-                                                    }
-                                                >
-                                                    12h
-                                                </button>
-                                                <button
-                                                    className={`px-3 py-1 ${
-                                                        timeFormat === "24h"
-                                                            ? "bg-redy text-white"
-                                                            : ""
-                                                    }`}
-                                                    onClick={() =>
-                                                        setTimeFormat("24h")
-                                                    }
-                                                >
-                                                    24h
-                                                </button>
-                                            </div>
+                                            <TimeFormatToggle
+                                                value={timeFormat}
+                                                onChange={setTimeFormat}
+                                            />
                                         </div>
 
                                         {loadingSlots ? (
@@ -243,6 +242,7 @@ export default function PackagePage() {
                                                 }
                                                 selectedSlot={currentTime}
                                                 onSlotSelect={handleTimeSelect}
+                                                format={timeFormat}
                                             />
                                         )}
                                     </>
