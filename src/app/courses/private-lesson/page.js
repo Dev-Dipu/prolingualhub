@@ -10,9 +10,11 @@ import TimeFormatToggle from "@/components/TimeFormatToggle";
 import { api } from "@/lib/axios";
 import { Clock } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function PrivateLessonPage() {
     const router = useRouter();
+    const { t, language } = useLanguage();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedTime, setSelectedTime] = useState(null);
     const [availableSlots, setAvailableSlots] = useState([]);
@@ -79,7 +81,11 @@ export default function PrivateLessonPage() {
         };
 
         sessionStorage.setItem("bookingData", JSON.stringify(bookingData));
-        router.push("/courses/private-lesson/checkout");
+        const target =
+            language === "ru"
+                ? "/ru/courses/private-lesson/checkout"
+                : "/courses/private-lesson/checkout";
+        router.push(target);
     };
 
     // Helper function to add one hour to time
@@ -100,17 +106,15 @@ export default function PrivateLessonPage() {
                         {/* LEFT INFO */}
                         <div className="p-6 border-r border-gray-200">
                             <p className="text-redy text-[12px] font-bold uppercase mb-4">
-                                PROLINGUALHUB
+                                {t.privatePage.company}
                             </p>
 
                             <h1 className="text-[15px] font-bold uppercase mb-4">
-                                PRIVATE ENGLISH LESSONS – 1 HOUR
+                                {t.privatePage.title}
                             </h1>
 
                             <p className="text-[13px] text-gray-500 leading-relaxed mb-6">
-                                ONE-HOUR PRIVATE ENGLISH LESSONS DESIGNED TO
-                                IMPROVE YOUR SPEAKING, CONFIDENCE, AND OVERALL
-                                COMMUNICATION WITH PERSONALIZED GUIDANCE.
+                                {t.privatePage.desc}
                             </p>
 
                             <div className="space-y-3 text-[13px] text-gray-500">
@@ -124,7 +128,7 @@ export default function PrivateLessonPage() {
                                         src="/googlemeet.png"
                                         alt="google meet"
                                     />
-                                    Google Meet
+                                    {t.privatePage.location}
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Image
@@ -133,7 +137,7 @@ export default function PrivateLessonPage() {
                                         src="/world.png"
                                         alt="world"
                                     />
-                                    Europe/London
+                                    {t.privatePage.timezone}
                                 </div>
                             </div>
                         </div>
@@ -155,7 +159,9 @@ export default function PrivateLessonPage() {
                                     <div className="flex items-center justify-between mb-4">
                                         <p className="text-[14px] font-semibold">
                                             {selectedDate.toLocaleDateString(
-                                                "en-US",
+                                                language === "ru"
+                                                    ? "ru-RU"
+                                                    : "en-US",
                                                 { weekday: "short" }
                                             )}{" "}
                                             {selectedDate.getDate()}
@@ -170,7 +176,7 @@ export default function PrivateLessonPage() {
                                     {loading ? (
                                         <div className="flex items-center justify-center py-8">
                                             <div className="text-gray-500 text-sm">
-                                                Loading available times...
+                                                {t.privatePage.loading}
                                             </div>
                                         </div>
                                     ) : (
@@ -190,7 +196,7 @@ export default function PrivateLessonPage() {
                                     disabled={!selectedDate || !selectedTime}
                                     onClick={handleContinue}
                                 >
-                                    Continue
+                                    {t.privatePage.continue}
                                 </PrimaryButton>
                             </div>
                         </div>

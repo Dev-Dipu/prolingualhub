@@ -10,9 +10,11 @@ import TimeFormatToggle from "@/components/TimeFormatToggle";
 import { api } from "@/lib/axios";
 import { Clock } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function PackagePage() {
     const router = useRouter();
+    const { t, language } = useLanguage();
 
     const [selectedSlots, setSelectedSlots] = useState([]);
     const [currentDate, setCurrentDate] = useState(null);
@@ -22,12 +24,11 @@ export default function PackagePage() {
     const [timeFormat, setTimeFormat] = useState("24h");
 
     const courseData = {
-        title: "PRIVATE LESSON PACKAGE (4 LESSONS) – 1 HOUR",
-        description:
-            "A PACKAGE OF 4 PRIVATE ONE-HOUR LESSONS, TAILORED TO YOUR LEVEL, WITH FOCUSED GUIDANCE AND STEADY PROGRESS IN EVERY SESSION.",
+        title: t.packagePage.title,
+        description: t.packagePage.desc,
         duration: "1h",
-        location: "Google Meet",
-        timezone: "Europe/London",
+        location: t.packagePage.location,
+        timezone: t.packagePage.timezone,
         price: 199,
         maxSlots: 4,
     };
@@ -129,7 +130,11 @@ export default function PackagePage() {
         };
 
         sessionStorage.setItem("bookingData", JSON.stringify(bookingData));
-        router.push("/courses/package/checkout");
+        const target =
+            language === "ru"
+                ? "/ru/courses/package/checkout"
+                : "/courses/package/checkout";
+        router.push(target);
     };
 
     // Helper function to add one hour to time
@@ -141,7 +146,7 @@ export default function PackagePage() {
 
     const formatSelectedDate = () => {
         if (!currentDate) return "";
-        const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; // TODO: Translate days?
         return `${days[currentDate.getDay()]} ${currentDate.getDate()}`;
     };
 
@@ -172,7 +177,7 @@ export default function PackagePage() {
                         {/* LEFT INFO */}
                         <div className="p-6 border-r border-gray-200">
                             <p className="text-redy text-[12px] font-bold uppercase mb-4">
-                                PROLINGUALHUB
+                                {t.courseData?.company || "PROLINGUALHUB"}
                             </p>
 
                             <h1 className="text-[15px] font-bold uppercase mb-4">
@@ -236,7 +241,7 @@ export default function PackagePage() {
                                         {loadingSlots ? (
                                             <div className="flex items-center justify-center py-8">
                                                 <div className="text-gray-500 text-sm">
-                                                    Loading available times...
+                                                    {t.packagePage.loading}
                                                 </div>
                                             </div>
                                         ) : (
@@ -253,7 +258,7 @@ export default function PackagePage() {
                                 ) : (
                                     <div className="space-y-3">
                                         <p className="text-[13px] font-semibold text-gray-700">
-                                            Selected slots
+                                            {t.packagePage.selectedSlots}
                                         </p>
 
                                         {selectedSlots.map((slot, index) => (
@@ -271,7 +276,7 @@ export default function PackagePage() {
                                                     }
                                                     className="text-redy text-[12px]"
                                                 >
-                                                    Remove
+                                                    {t.packagePage.remove}
                                                 </button>
                                             </div>
                                         ))}
@@ -280,7 +285,7 @@ export default function PackagePage() {
                             ) : (
                                 <div className="space-y-3">
                                     <p className="text-[13px] font-semibold text-gray-700">
-                                        Selected slots
+                                        {t.packagePage.selectedSlots}
                                     </p>
 
                                     {selectedSlots.map((slot, index) => (
@@ -298,7 +303,7 @@ export default function PackagePage() {
                                                 }
                                                 className="text-redy text-[12px]"
                                             >
-                                                Remove
+                                                {t.packagePage.remove}
                                             </button>
                                         </div>
                                     ))}
@@ -308,7 +313,8 @@ export default function PackagePage() {
                             {/* FOOTER */}
                             <div className="mt-auto pt-6 space-y-2">
                                 <p className="text-[12px] text-gray-500">
-                                    Selected slots: {selectedSlots.length} /{" "}
+                                    {t.packagePage.selectedSlots}:{" "}
+                                    {selectedSlots.length} /{" "}
                                     {courseData.maxSlots}
                                 </p>
 
@@ -320,7 +326,7 @@ export default function PackagePage() {
                                     }
                                     onClick={handleContinue}
                                 >
-                                    Continue
+                                    {t.packagePage.continue}
                                 </PrimaryButton>
                             </div>
                         </div>

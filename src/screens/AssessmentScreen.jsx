@@ -5,6 +5,7 @@ import Assessment from "@/components/Assessment";
 import AssessmentSelection from "@/components/AssessmentSelection";
 import AssessmentQuestion from "@/components/AssessmentQuestion";
 import AssessmentResult from "@/components/AssessmentResult";
+import { useLanguage } from "@/context/LanguageContext";
 
 const AssessmentScreen = () => {
     const [step, setStep] = useState("intro");
@@ -15,6 +16,7 @@ const AssessmentScreen = () => {
     const [noQuestions, setNoQuestions] = useState(false);
 
     const router = useRouter();
+    const { language } = useLanguage();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -136,7 +138,10 @@ const AssessmentScreen = () => {
         setScores({});
     };
 
-    const handleJoinWorkshop = () => router.push("/courses");
+    const handleJoinWorkshop = () => {
+        const target = language === "ru" ? "/ru/courses" : "/courses";
+        router.push(target);
+    };
 
     // ---- EMPTY STATES ----
 
@@ -233,10 +238,18 @@ const AssessmentScreen = () => {
                                 </p>
                                 <button
                                     onClick={() => {
-                                        currentTypeIndex <
-                                        selectedTypes.length - 1
-                                            ? handleSkip(true)
-                                            : router.push("/courses");
+                                        const target =
+                                            language === "ru"
+                                                ? "/ru/courses"
+                                                : "/courses";
+                                        if (
+                                            currentTypeIndex <
+                                            selectedTypes.length - 1
+                                        ) {
+                                            handleSkip(true);
+                                        } else {
+                                            router.push(target);
+                                        }
                                     }}
                                     className="px-6 py-3 bg-redy text-whitey rounded-lg font-bold hover:bg-red-600 transition-colors uppercase tracking-widest cursor-pointer"
                                 >

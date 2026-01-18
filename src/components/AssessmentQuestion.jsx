@@ -1,6 +1,8 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { CheckCircle2 } from "lucide-react";
 import BackButton from "./BackButton";
+import { useLanguage } from "@/context/LanguageContext";
 
 const AssessmentQuestion = ({
     data,
@@ -9,6 +11,7 @@ const AssessmentQuestion = ({
     totalQuestions,
     completedQuestionsCount,
 }) => {
+    const { t } = useLanguage();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState(null);
     const [isAnswered, setIsAnswered] = useState(false);
@@ -16,6 +19,9 @@ const AssessmentQuestion = ({
 
     const currentQuestion = data.questions[currentQuestionIndex];
     const isLastQuestion = currentQuestionIndex === data.questions.length - 1;
+
+    // Resolve translated title if possible, else fallback
+    const localizedTitle = t.assessment.selection[data.id]?.title || data.title;
 
     useEffect(() => {
         // Restore state if we have visited this question before
@@ -87,13 +93,15 @@ const AssessmentQuestion = ({
 
     return (
         <div className="w-full max-w-3xl mx-auto px-4 flex flex-col h-full py-6 relative">
-            
-                <BackButton onBack={handleBack} />
-            
+            <BackButton onBack={handleBack} />
+
             {/* Progress Bar */}
             <div className="shrink-0 mt-8 md:mt-4">
-                <div className="flex justify-between text-[10px] md:text-sm font-medium mb-2">
-                    <span>{Math.round(progressPercentage)}% Complete</span>
+                <div className="flex justify-between text-[10px] md:text-sm font-medium mb-2 uppercase">
+                    <span>
+                        {Math.round(progressPercentage)}%{" "}
+                        {t.assessment.question.progress}
+                    </span>
                 </div>
                 <div className="h-1.5 md:h-2 w-full bg-gray-200 rounded-full overflow-hidden">
                     <div
@@ -101,16 +109,17 @@ const AssessmentQuestion = ({
                         style={{ width: `${progressPercentage}%` }}
                     />
                 </div>
-                <p className="text-[9px] md:text-xs text-gray-400 mt-2">
-                    Phase: {data.title}
+                <p className="text-[9px] md:text-xs text-gray-400 mt-2 uppercase">
+                    {t.assessment.question.phase}: {localizedTitle}
                 </p>
             </div>
 
             {/* Question Card */}
             <div className="flex-1 flex flex-col justify-center my-6">
                 <div className="bg-whitey rounded-sm border py-6 px-4 md:p-8 shadow-sm w-full">
-                    <p className="text-gray-500 mb-1.5 md:mb-4 text-[9px] md:text-base">
-                        Question {currentQuestionIndex + 1} Of{" "}
+                    <p className="text-gray-500 mb-1.5 md:mb-4 text-[9px] md:text-base uppercase">
+                        {t.assessment.question.question}{" "}
+                        {currentQuestionIndex + 1} {t.assessment.question.of}{" "}
                         {data.questions.length}
                     </p>
 
@@ -166,20 +175,22 @@ const AssessmentQuestion = ({
                 <div className="flex flex-col-reverse md:flex-row justify-end md:gap-4 gap-2.5 text-sm md:text-base">
                     <button
                         onClick={handleSkip}
-                        className="px-8 py-2 w-full md:w-auto rounded-sm border border-red-200 text-redy font-medium hover:bg-red-50 transition-colors cursor-pointer text-center"
+                        className="px-8 py-2 w-full md:w-auto rounded-sm border border-red-200 text-redy font-medium hover:bg-red-50 transition-colors cursor-pointer text-center uppercase"
                     >
-                        Skip
+                        {t.assessment.question.skip}
                     </button>
                     <button
                         onClick={handleNext}
                         disabled={!isAnswered}
-                        className={`px-8 py-2 w-full md:w-auto cursor-pointer rounded-sm font-medium transition-colors text-center ${
+                        className={`px-8 py-2 w-full md:w-auto cursor-pointer rounded-sm font-medium transition-colors text-center uppercase ${
                             isAnswered
                                 ? "bg-redy text-white hover:bg-red-700"
                                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
                         }`}
                     >
-                        {isLastQuestion ? "Finish Section" : "Next"}
+                        {isLastQuestion
+                            ? t.assessment.question.finish
+                            : t.assessment.question.next}
                     </button>
                 </div>
             </div>

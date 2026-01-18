@@ -1,8 +1,11 @@
+"use client";
 import React, { useState } from "react";
 import { BookOpen, Type, Mic } from "lucide-react";
 import BackButton from "./BackButton";
+import { useLanguage } from "@/context/LanguageContext";
 
 const AssessmentSelection = ({ onStart, onBack }) => {
+    const { t } = useLanguage();
     const [selectedTypes, setSelectedTypes] = useState([]);
 
     const toggleSelection = (type) => {
@@ -22,32 +25,31 @@ const AssessmentSelection = ({ onStart, onBack }) => {
     const options = [
         {
             id: "grammar",
-            title: "Grammar Test",
-            description:
-                "Evaluate your understanding of english grammar rules.",
+            title: t.assessment.selection.grammar.title,
+            description: t.assessment.selection.grammar.description,
             icon: <BookOpen className="md:w-6 md:h-6 w-4 h-4 text-redy" />,
         },
         {
             id: "vocabulary",
-            title: "Vocabulary Test",
-            description: "Measure the breadth and depth of your vocabulary.",
+            title: t.assessment.selection.vocabulary.title,
+            description: t.assessment.selection.vocabulary.description,
             icon: <Type className="md:w-6 md:h-6 w-4 h-4 text-redy" />,
         },
     ];
 
     return (
         <div className="flex flex-col items-center pt-12 md:pt-0 md:justify-center h-dvh w-full max-w-5xl mx-auto px-7 relative">
-                <BackButton onBack={onBack} />
+            <BackButton onBack={onBack} />
             {/* Mobile back button needs to be visible too, usually top left. Main container has pt-12 on mobile which might conflict.
            Let's just put it absolute. top-4 left-4 for mobile.
         */}
 
-            <h1 className="text-[22px] md:text-5xl font-semibold mb-4 text-center">
-                Complete English Skill Assessment
+            <h1 className="text-[22px] md:text-5xl font-semibold mb-4 text-center uppercase">
+                {t.assessment.selection.title}
             </h1>
 
             <p className="text-xs md:text-lg text-gray-500 mb-12 text-center">
-                Choose a test to start your assessment.
+                {t.assessment.selection.subtitle}
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:w-3/4 mb-12">
@@ -66,7 +68,7 @@ const AssessmentSelection = ({ onStart, onBack }) => {
                             <div className="p-2 bg-red-50 rounded-sm">
                                 {option.icon}
                             </div>
-                            <h3 className="text-sm md:text-lg font-bold leading-none">
+                            <h3 className="text-sm md:text-lg font-bold leading-none uppercase">
                                 {option.title}
                             </h3>
                         </div>
@@ -82,14 +84,14 @@ const AssessmentSelection = ({ onStart, onBack }) => {
                 <button
                     onClick={handleStart}
                     disabled={selectedTypes.length === 0}
-                    className={`px-8 py-3 w-full md:w-auto cursor-pointer rounded-sm font-semibold transition-colors text-sm md:text-base
+                    className={`px-8 py-3 w-full md:w-auto cursor-pointer rounded-sm font-semibold transition-colors text-sm md:text-base uppercase
             ${
                 selectedTypes.length > 0
                     ? "bg-redy text-white hover:bg-red-700"
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}
                 >
-                    Start Test
+                    {t.assessment.selection.start}
                 </button>
             </div>
         </div>

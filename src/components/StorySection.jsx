@@ -3,10 +3,12 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const StorySection = () => {
+    const { t } = useLanguage();
     const containerRef = useRef(null);
     const titleRef = useRef(null);
     const imageWrapperRef = useRef(null);
@@ -156,10 +158,10 @@ const StorySection = () => {
                 className="text-center px-4 z-20 w-full max-w-6xl mx-auto absolute top-24 left-0 right-0"
             >
                 <h2 className="text-4xl md:text-7xl font-bold text-blacky uppercase leading-none tracking-tight flex flex-wrap justify-center">
-                    {renderTitle("The Story Behind")}
+                    {renderTitle(t.story.title1)}
                 </h2>
                 <h2 className="text-4xl md:text-7xl font-bold text-blacky uppercase leading-none tracking-tight flex flex-wrap justify-center">
-                    {renderTitle("Prolingual Hub")}
+                    {renderTitle(t.story.title2)}
                 </h2>
             </div>
 
@@ -188,7 +190,7 @@ const StorySection = () => {
                         className="absolute top-10 right-4 md:top-20 md:right-[8%] translate-x-8 md:translate-x-32 flex flex-col items-center z-20 will-change-transform"
                     >
                         <span className="font-[family-name:var(--font-supfont)] text-redy text-2xl md:text-4xl -rotate-6 mb-2 translate-x-12">
-                            meet irina
+                            {t.story.meetIrina}
                         </span>
                         <svg
                             className="md:scale-175 scale-125"
@@ -233,9 +235,12 @@ const StorySection = () => {
                 ref={textContainerRef}
                 className="absolute bottom-0 left-0 w-full h-1/2 flex items-center justify-center px-6 pointer-events-none pb-20"
             >
-                <div ref={textRef} className="max-w-xl text-center uppercase text-sm md:text-2xl md:leading-none max-[380px]:text-[10px] max-[380px]:max-w-[90%]">
+                <div
+                    ref={textRef}
+                    className="max-w-xl text-center uppercase text-sm md:text-2xl md:leading-none max-[380px]:text-[10px] max-[380px]:max-w-[90%]"
+                >
                     <p className="font-bold leading-relaxed uppercase tracking-wide">
-                        Irina is the founder of ProLingual Hub Ltd, a UK-based company delivering fast, practical English courses for non-native professionals. Having moved to the UK over 26 years ago with no English, she experienced the challenges of learning a new language firsthand. With two degrees in education and a background in public service, she created the “5 Senses” method, blending sensory learning, workplace communication, cultural etiquette, and GPT-powered tools to help learners gain fluency with confidence and ease.
+                        {t.story.content}
                     </p>
                 </div>
             </div>

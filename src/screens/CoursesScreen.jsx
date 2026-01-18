@@ -3,70 +3,55 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, Calendar, User, Layers } from "lucide-react";
 import BackButton from "@/components/BackButton";
+import { useLanguage } from "@/context/LanguageContext";
 
 const CoursesScreen = () => {
     const router = useRouter();
+    const { t, language } = useLanguage();
 
     const courses = [
         {
-            title: "MONTHLY ENGLISH WORKSHOP",
-            dets: "(1 HOUR)",
-            tag: "LIVE GROUP LEARNING!",
+            title: t.courses.workshop.title,
+            dets: t.courses.workshop.dets,
+            tag: t.courses.workshop.tag,
             icon: <Calendar className="w-5 h-5 text-white" />,
-            description:
-                "A Focused Group Workshop To Strengthen Your English-Every Month.",
-            features: [
-                "1-HOUR LIVE GROUP WORKSHOP",
-                "PRACTICAL SPEAKING ACTIVITIES",
-                "REAL-TIME FEEDBACK",
-                "MONTHLY THEMED SESSIONS",
-                "SUITABLE FOR A2-B2 LEVELS",
-                "PAY ONLY FOR THE SESSION YOU JOIN",
-                "MEETING LINK SHARED AFTER BOOKING",
-            ],
-            price: "£68",
+            description: t.courses.workshop.description,
+            features: t.courses.workshop.features,
+            price: t.courses.workshop.price,
             color: "redy",
-            cta: "Join Workshop",
-            route: "/courses/workshop",
+            cta: t.courses.workshop.cta,
+            route:
+                language === "ru"
+                    ? "/ru/courses/workshop"
+                    : "/courses/workshop",
         },
         {
-            title: "PRIVATE 1:1 LESSON",
-            dets: "(1 HOUR)",
-            tag: "PERSONAL COACHING!",
+            title: t.courses.private.title,
+            dets: t.courses.private.dets,
+            tag: t.courses.private.tag,
             icon: <User className="w-5 h-5 text-white" />,
-            description: "A Personalised Session Built Around Your Goals.",
-            features: [
-                "1-HOUR PRIVATE LESSON",
-                "CHOOSE YOUR PREFERRED DATE & TIME",
-                "CUSTOMISED LESSON PLAN",
-                "REAL-TIME SPEAKING CORRECTION",
-                "GREAT FOR INTERVIEWS & WORKPLACE ENGLISH",
-                "EASY BOOKING",
-            ],
-            price: "£58",
-            cta: "Book 1:1 Session",
-            route: "/courses/private-lesson",
+            description: t.courses.private.description,
+            features: t.courses.private.features,
+            price: t.courses.private.price,
+            cta: t.courses.private.cta,
+            route:
+                language === "ru"
+                    ? "/ru/courses/private-lesson"
+                    : "/courses/private-lesson",
         },
         {
-            title: "PRIVATE LESSON PACKAGE",
-            dets: "(4 LESSONS)",
-            tag: "BEST VALUE!",
+            title: t.courses.package.title,
+            dets: t.courses.package.dets,
+            tag: t.courses.package.tag,
             icon: <Layers className="w-5 h-5 text-white" />,
-            description:
-                "A Structured Private Learning Plan Designed For Consistent Progress.",
-            features: [
-                "4x PERSONALISED 1-HOUR SESSIONS",
-                "SAVE MORE COMPARED TO SINGLE LESSONS",
-                "BOOK FOUR DIFFERENT DATES",
-                "STRUCTURED IMPROVEMENT PATH",
-                "PRIORITY ACCESS TO TIME SLOTS",
-                "SESSION NOTES + PRACTICE RECOMMENDATIONS",
-            ],
-            price: "£199",
-            originalPrice: "£232",
-            save: "Save £33",
-            cta: "Schedule 4 Sessions",
-            route: "/courses/package",
+            description: t.courses.package.description,
+            features: t.courses.package.features,
+            price: t.courses.package.price,
+            originalPrice: "£232", // Hardcoded or needs key? Assuming hardcoded for now or add to translations if needed. Image shows 232.
+            save: t.courses.package.save,
+            cta: t.courses.package.cta,
+            route:
+                language === "ru" ? "/ru/courses/package" : "/courses/package",
         },
     ];
 
@@ -82,11 +67,10 @@ const CoursesScreen = () => {
                     {/* Header */}
                     <div className="text-center mt-8 md:mt-10 mb-10 md:mb-14 space-y-2 md:space-y-4 px-4 shrink-0">
                         <h1 className="text-2xl md:text-4xl font-bold text-blacky uppercase tracking-tight leading-tight">
-                            CHOOSE HOW YOU WANT TO LEARN.
+                            {t.courses.header.title}
                         </h1>
                         <p className="text-gray-500 text-xs md:text-lg uppercase tracking-wide font-medium md:leading-none">
-                            Find The Session That Fits Your Schedule, Learning
-                            Style And Goals.
+                            {t.courses.header.subtitle}
                         </p>
                     </div>
 
