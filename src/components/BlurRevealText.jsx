@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const BlurRevealText = ({ items: propItems }) => {
   const containerRef = useRef(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const items = propItems || t.blurRevealText.items;
 
   useEffect(() => {
@@ -79,7 +79,9 @@ const BlurRevealText = ({ items: propItems }) => {
           key={index}
           className="text-section h-screen flex items-center justify-center px-4"
         >
-          <h2 className="w-4/5 md:w-1/2 leading-none text-3xl md:text-8xl font-bold text-black text-center uppercase">
+          <h2 className={`w-4/5 text-3xl leading-none font-bold text-black text-center uppercase
+            ${language === "en" ? "md:text-8xl md:w-1/2" : "md:text-6xl md:w-2/3"}
+            `}>
             {item.split("\n").map((line, lineIndex) => (
               <div key={lineIndex} className="block">
                 {line.split(" ").map((word, wordIndex) => (
