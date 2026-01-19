@@ -149,7 +149,9 @@ const SlideText = () => {
         {Array.from({ length: copies }).map((_, i) => (
           <div
             key={i}
-            className={`word-line flex text-6xl md:text-9xl font-bold leading-none tracking-tight transition-colors duration-300 ${
+            className={`word-line flex font-bold leading-none tracking-tight transition-colors duration-300
+              ${language === "en" ? "text-6xl md:text-9xl" : "text-4xl md:text-6xl"}
+              ${
               i === copies - 1 ? "text-black" : "text-black"
             }`}
           >
