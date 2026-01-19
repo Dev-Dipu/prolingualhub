@@ -1,11 +1,11 @@
 "use client";
-import ConfirmationPage from "@/app/confirmation/page";
+import ConfirmationScreen from "@/screens/ConfirmationScreen";
 import { LanguageProvider } from "@/context/LanguageContext";
 
 export default function RuConfirmationPage() {
     return (
         <LanguageProvider initialLanguage="ru">
-            <ConfirmationPage />
+            <ConfirmationScreen />
         </LanguageProvider>
     );
 }
