@@ -83,7 +83,7 @@ const CoursesScreen = () => {
                             >
                                 {/* Header */}
                                 <div className="flex justify-between items-start mb-3">
-                                    <h2 className="text-base md:text-lg font-bold leading-snug w-3/4 uppercase">
+                                    <h2 className={`text-base md:text-lg font-bold leading-snug  uppercase ${language === "ru" && index === 2 ? "w-[90%]" : "w-3/4"}`}>
                                         {course.title}{" "}
                                         <span className="text-nowrap">
                                             {course.dets}

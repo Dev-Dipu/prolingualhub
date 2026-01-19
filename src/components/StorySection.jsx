@@ -8,7 +8,7 @@ import { useLanguage } from "@/context/LanguageContext";
 gsap.registerPlugin(ScrollTrigger);
 
 const StorySection = () => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const containerRef = useRef(null);
     const titleRef = useRef(null);
     const imageWrapperRef = useRef(null);
@@ -237,7 +237,7 @@ const StorySection = () => {
             >
                 <div
                     ref={textRef}
-                    className="max-w-xl text-center uppercase text-sm md:text-2xl md:leading-none max-[380px]:text-[10px] max-[380px]:max-w-[90%]"
+                    className={`max-w-xl text-center uppercase text-sm md:text-2xl md:leading-none max-[380px]:text-[10px] max-[380px]:max-w-[90%]`}
                 >
                     <p className="font-bold leading-relaxed uppercase tracking-wide">
                         {t.story.content}
