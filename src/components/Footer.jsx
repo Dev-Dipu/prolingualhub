@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -99,6 +100,15 @@ const Footer = () => {
                 <span ref={heartRef}>❤️</span>
                 <span ref={textRef}>ProlingualHub</span>
             </div>
+
+            {/* Video Link */}
+            <Link
+                href="/videos"
+                className="mt-4 flex items-center justify-center gap-2 text-xs md:text-base font-medium text-gray-500 hover:text-black transition-colors"
+            >
+                <span className="w-2 h-2 rounded-full animate-blink-red-black block"></span>
+                <span>[CLICK TO WATCH] HOW PROLINGUAL HUB WORKS</span>
+            </Link>
 
             {/* Contact Icons */}
             <div className="absolute bottom-4 left-4 md:left-10 flex gap-1 justify-center items-center">

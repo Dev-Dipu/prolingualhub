@@ -132,3 +132,17 @@
         @apply bg-background text-foreground;
     }
 }
+
+@keyframes blink-red-black {
+    0%,
+    100% {
+        background-color: #ef4444;
+    } /* red-500 */
+    50% {
+        background-color: #000000;
+    }
+}
+
+.animate-blink-red-black {
+    animation: blink-red-black 1s infinite;
+}
