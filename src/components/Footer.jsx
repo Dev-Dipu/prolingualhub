@@ -1,162 +1,156 @@
 "use client";
+
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lottie from "lottie-react";
 
 import { useLanguage } from "@/context/LanguageContext";
+
+import linkedinAnim from "../../public/lottie/linkedin.json";
+import mailAnim from "../../public/lottie/mail.json";
+import phoneAnim from "../../public/lottie/phone.json";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
-  const { t } = useLanguage();
-  const containerRef = useRef(null);
-  const iRef = useRef(null);
-  const heartRef = useRef(null);
-  const textRef = useRef(null);
+    const { t } = useLanguage();
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 50%", // Start when footer is visible
-          toggleActions: "play none none none", // Play once
-        },
-      });
+    const containerRef = useRef(null);
+    const iRef = useRef(null);
+    const heartRef = useRef(null);
+    const textRef = useRef(null);
 
-      // 1. "I" and "ProlingualHub" slide in from sides
-      tl.from(
-        iRef.current,
-        {
-          xPercent: -200,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-        },
-        "start",
-      );
+    const linkedinRef = useRef(null);
+    const mailRef = useRef(null);
+    const phoneRef = useRef(null);
 
-      tl.from(
-        textRef.current,
-        {
-          xPercent: 200,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-        },
-        "start",
-      );
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top 50%",
+                    toggleActions: "play none none none",
+                },
+            });
 
-      // 2. Heart comes up from bottom
-      tl.from(
-        heartRef.current,
-        {
-          yPercent: 200,
-          opacity: 0,
-          scale: 0,
-          duration: 0.8,
-          ease: "back.out(1.7)", // Bouncy arrival
-        },
-        "-=0.6",
-      ); // Start before text finishes
+            tl.from(iRef.current, {
+                xPercent: -200,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out",
+            });
 
-      // 3. Impact/Push effect (The "khiskayega" part)
-      // As heart lands, push text outwards and bounce back
-      tl.to(
-        iRef.current,
-        {
-          x: -40,
-          duration: 0.1,
-          ease: "power1.out",
-        },
-        "-=0.2",
-      ); // Sync with heart landing
+            tl.from(
+                textRef.current,
+                {
+                    xPercent: 200,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                },
+                "<",
+            );
 
-      tl.to(
-        textRef.current,
-        {
-          x: 40,
-          duration: 0.1,
-          ease: "power1.out",
-        },
-        "<",
-      );
+            tl.from(
+                heartRef.current,
+                {
+                    yPercent: 200,
+                    opacity: 0,
+                    scale: 0,
+                    duration: 0.8,
+                    ease: "back.out(1.7)",
+                },
+                "-=0.6",
+            );
 
-      // Return to normal (Bounce back)
-      tl.to(iRef.current, {
-        x: 0,
-        duration: 0.8,
-        ease: "elastic.out(1, 0.3)",
-      });
+            tl.to(iRef.current, { x: -40, duration: 0.1 }, "-=0.2");
+            tl.to(textRef.current, { x: 40, duration: 0.1 }, "<");
 
-      tl.to(
-        textRef.current,
-        {
-          x: 0,
-          duration: 0.8,
-          ease: "elastic.out(1, 0.3)",
-        },
-        "<",
-      );
-    }, containerRef);
+            tl.to(iRef.current, {
+                x: 0,
+                duration: 0.8,
+                ease: "elastic.out(1, 0.3)",
+            });
 
-    return () => ctx.revert();
-  }, []);
+            tl.to(
+                textRef.current,
+                {
+                    x: 0,
+                    duration: 0.8,
+                    ease: "elastic.out(1, 0.3)",
+                },
+                "<",
+            );
+        }, containerRef);
 
-  return (
-    <div
-      ref={containerRef}
-      className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden uppercase"
-    >
-      <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-4xl md:text-7xl font-bold text-black text-center">
-        <span ref={iRef} className="inline-block">
-          {t.footer.i}
-        </span>
-        <span
-          ref={heartRef}
-          className="inline-block origin-center text-red-500"
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <div
+            ref={containerRef}
+            className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden uppercase"
         >
-          ❤️
-        </span>
-        <span ref={textRef} className="inline-block">
-          ProlingualHub
-        </span>
-      </div>
+            {/* Main Text */}
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-4xl md:text-7xl font-bold text-black text-center">
+                <span ref={iRef}>{t.footer.i}</span>
+                <span ref={heartRef}>❤️</span>
+                <span ref={textRef}>ProlingualHub</span>
+            </div>
 
-      {/* Contact Info */}
-      <div className="absolute font-normal bottom-6 left-4 md:left-10 text-gray-500 text-xs md:text-base space-y-1">
-    <p>
-        <a
-            href="mailto:speaklanguage@prolingualhub.com"
-            className="hover:text-blacky transition-colors"
-        >
-            email
-        </a>
-    </p>
+            {/* Contact Icons */}
+            <div className="absolute bottom-4 left-4 md:left-10 flex gap-1 justify-center items-center">
+                {/* Email */}
+                <a
+                    href="mailto:speaklanguage@prolingualhub.com"
+                    onMouseEnter={() => mailRef.current?.play()}
+                    onMouseLeave={() => mailRef.current?.stop()}
+                >
+                    <Lottie
+                        lottieRef={mailRef}
+                        animationData={mailAnim}
+                        autoplay={false}
+                        loop={false}
+                        style={{ width: 60 }}
+                    />
+                </a>
 
-    <p>
-        <a
-            href="tel:+447894994298"
-            className="hover:text-blacky transition-colors"
-        >
-            phone
-        </a>
-    </p>
+                {/* Phone */}
+                <a
+                    href="tel:+447894994298"
+                    onMouseEnter={() => phoneRef.current?.play()}
+                    onMouseLeave={() => phoneRef.current?.stop()}
+                >
+                    <Lottie
+                        lottieRef={phoneRef}
+                        animationData={phoneAnim}
+                        autoplay={false}
+                        loop={false}
+                        style={{ width: 80 }}
+                    />
+                </a>
 
-    <p>
-        <a
-            href="https://linkedin.com/in/irina-statham-238734387"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blacky transition-colors"
-        >
-            linkedin
-        </a>
-    </p>
-</div>
-
-    </div>
-  );
+                {/* LinkedIn */}
+                <a
+                    href="https://linkedin.com/in/irina-statham-238734387"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onMouseEnter={() => linkedinRef.current?.play()}
+                    onMouseLeave={() => linkedinRef.current?.stop()}
+                >
+                    <Lottie
+                        lottieRef={linkedinRef}
+                        animationData={linkedinAnim}
+                        autoplay={false}
+                        loop={false}
+                        style={{ width: 50 }}
+                    />
+                </a>
+            </div>
+        </div>
+    );
 };
 
 export default Footer;
