@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,56 +9,37 @@ import { useLanguage } from "@/context/LanguageContext";
 gsap.registerPlugin(ScrollTrigger);
 
 const StorySection = () => {
-    const { t, language } = useLanguage();
+    const { t } = useLanguage();
+
     const containerRef = useRef(null);
     const titleRef = useRef(null);
     const imageWrapperRef = useRef(null);
     const arrowRef = useRef(null);
-    const textRef = useRef(null);
-    const textContainerRef = useRef(null);
 
     useEffect(() => {
         const isMobile = window.innerWidth < 768;
+
         let ctx = gsap.context(() => {
-            // --- SETUP ---
-            const titleWords = titleRef.current.querySelectorAll(".word");
-            gsap.set(titleWords, { yPercent: 120, opacity: 0 }); // Hidden initially
+            const titleWords =
+                titleRef.current.querySelectorAll(".word");
 
-            // Split text into words and wrap each in a span
-            const textContent = textRef.current.textContent;
-            textRef.current.innerHTML = textContent
-                .split(" ")
-                .map(
-                    (word) =>
-                        `<span class="word-item md:text-xl">${word} </span>`
-                )
-                .join("");
-
-            const words = textRef.current.querySelectorAll(".word-item");
-
-            // Text setup: Start way below viewport, fully visible container
-            gsap.set(textRef.current, {
-                y: window.innerHeight * 0.6, // Start much lower
-                opacity: 1,
+            gsap.set(titleWords, {
+                yPercent: 120,
+                opacity: 0,
             });
 
-            gsap.set(words, {
-                color: "#A2A2A2",
-            });
-
-            // MAIN TIMELINE
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top top",
-                    end: "+=600%", // Extended for smooth line-by-line reveal
+                    end: "+=600%",
                     pin: true,
                     scrub: 1,
                     anticipatePin: 1,
                 },
             });
 
-            // --- STEP 0: TITLE REVEAL (Fast, as we pin) ---
+            // TITLE REVEAL
             tl.to(titleWords, {
                 yPercent: 0,
                 opacity: 1,
@@ -66,11 +48,9 @@ const StorySection = () => {
                 ease: "power2.out",
             });
 
-            // Hold title for a brief moment
             tl.to({}, { duration: 0.2 });
 
-            // --- STEP 1: MOVE VISUALS UP (Clear space for text) ---
-            // Move Title OUT (Up)
+            // MOVE UP VISUALS
             tl.to(
                 titleRef.current,
                 {
@@ -82,7 +62,6 @@ const StorySection = () => {
                 "moveUp"
             );
 
-            // Move Arrow OUT (Up)
             tl.to(
                 arrowRef.current,
                 {
@@ -93,41 +72,15 @@ const StorySection = () => {
                 "moveUp"
             );
 
-            // Move Image & Arrow UP and Shrink slightly
             tl.to(
                 [imageWrapperRef.current, arrowRef.current],
                 {
                     y: -window.innerHeight * (isMobile ? 0.2 : 0.35),
                     scale: 0.8,
-                    rotation: 0,
                     duration: 1,
                     ease: "power2.inOut",
                 },
                 "moveUp"
-            );
-
-            // --- STEP 2: TEXT SLOWLY RISES + TURNS RED + FADES ---
-            // All happening simultaneously for smooth continuous motion
-            tl.to(
-                textRef.current,
-                {
-                    y: isMobile ? "-20px" : "40px", // Move all the way up
-                    duration: 4, // Long duration for smooth scroll
-                    ease: "linear",
-                },
-                "textReveal"
-            );
-
-            // --- STEP 3: TURN RED (Word by word as text rises) ---
-            tl.to(
-                words,
-                {
-                    color: "#DC2626", // Turn Red
-                    duration: 1, // Shorter so red completes before fade
-                    stagger: 0.15, // Word by word
-                    ease: "none",
-                },
-                "textReveal" // Start at same time as text rises
             );
         }, containerRef);
 
@@ -148,51 +101,55 @@ const StorySection = () => {
     };
 
     return (
-        <div
-            ref={containerRef}
-            className="h-screen w-full bg-whitey flex flex-col items-center pt-24 font-[dm_mono] overflow-hidden relative"
-        >
-            {/* Title Wrapper */}
-            <div
-                ref={titleRef}
-                className="text-center px-4 z-20 w-full max-w-6xl mx-auto absolute top-24 left-0 right-0"
+        <>
+            {/* ================= PINNED ANIMATION SECTION ================= */}
+            <section
+                ref={containerRef}
+                className="h-screen w-full bg-whitey flex flex-col items-center pt-24 font-[dm_mono] relative"
             >
-                <h2 className="text-4xl md:text-7xl font-bold text-blacky uppercase leading-none tracking-tight flex flex-wrap justify-center">
-                    {renderTitle(t.story.title1)}
-                </h2>
-                <h2 className="text-4xl md:text-7xl font-bold text-blacky uppercase leading-none tracking-tight flex flex-wrap justify-center">
-                    {renderTitle(t.story.title2)}
-                </h2>
-            </div>
+                {/* TITLE */}
+                <div
+                    ref={titleRef}
+                    className="text-center px-4 z-20 w-full max-w-6xl mx-auto absolute top-24 left-0 right-0"
+                >
+                    <h2 className="text-4xl md:text-7xl font-bold text-blacky uppercase leading-none tracking-tight flex flex-wrap justify-center">
+                        {renderTitle(t.story.title1)}
+                    </h2>
+                    <h2 className="text-4xl md:text-7xl font-bold text-blacky uppercase leading-none tracking-tight flex flex-wrap justify-center">
+                        {renderTitle(t.story.title2)}
+                    </h2>
+                </div>
 
-            {/* Central Content (Images) */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center z-10 mt-10 md:mt-56 max-[380px]:scale-75 max-[380px]:mb-10">
-                <div className="relative">
-                    {/* Polaroid Image */}
-                    <div
-                        ref={imageWrapperRef}
-                        className="relative bg-white p-3 pb-12 shadow-[0_10px_30px_rgba(0,0,0,0.1)] -rotate-3 w-64 md:w-80 border border-gray-100 will-change-transform scale-80 md:scale-100"
-                    >
-                        <div className="w-full aspect-3/4 bg-gray-200 overflow-hidden relative">
-                            <Image
-                                width={622}
-                                height={415}
-                                src="/profile.webp"
-                                alt="Irina"
-                                className="w-full h-full object-cover grayscale hover:grayscale-0 hover:cursor-pointer transition-all duration-500"
-                            />
+                {/* IMAGE + ARROW */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center z-10 mt-10 md:mt-56">
+                    <div className="relative">
+                        {/* IMAGE */}
+                        <div
+                            ref={imageWrapperRef}
+                            className="relative bg-white p-3 pb-12 shadow-[0_10px_30px_rgba(0,0,0,0.1)] -rotate-3 w-64 md:w-80 border border-gray-100 will-change-transform"
+                        >
+                            <div className="w-full aspect-3/4 bg-gray-200 overflow-hidden relative">
+                                <Image
+                                    src="/profile.webp"
+                                    alt="Irina"
+                                    width={622}
+                                    height={415}
+                                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                                />
+                            </div>
                         </div>
-                    </div>
 
-                    {/* Arrow Element */}
-                    <div
-                        ref={arrowRef}
-                        className="absolute top-10 right-4 md:top-20 md:right-[8%] translate-x-8 md:translate-x-32 flex flex-col items-center z-20 will-change-transform"
-                    >
-                        <span className="font-[family-name:var(--font-supfont)] text-redy text-2xl md:text-4xl -rotate-6 mb-2 translate-x-12">
-                            {t.story.meetIrina}
-                        </span>
-                        <svg
+                        {/* ARROW */}
+                        <div
+                            ref={arrowRef}
+                            className="absolute top-10 right-4 md:top-20 md:right-[8%] translate-x-8 md:translate-x-32 flex flex-col items-center z-20 will-change-transform"
+                        >
+                            <span className="font-[family-name:var(--font-supfont)] text-redy text-2xl md:text-4xl -rotate-6 mb-2 translate-x-12">
+                                {t.story.meetIrina}
+                            </span>
+
+                            {/* SVG ARROW */}
+                            <svg
                             className="md:scale-175 scale-125"
                             width="46"
                             height="45"
@@ -225,26 +182,18 @@ const StorySection = () => {
                                 </clipPath>
                             </defs>
                         </svg>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            {/* Content Text Container - Positioned below the initial image position */}
-            {/* We position this relatively low so it scrolls up INTO view */}
-            <div
-                ref={textContainerRef}
-                className="absolute bottom-0 left-0 w-full h-1/2 flex items-center justify-center px-6 pointer-events-none pb-20"
-            >
-                <div
-                    ref={textRef}
-                    className={`max-w-xl text-center uppercase text-sm md:text-2xl md:leading-none max-[380px]:text-[10px] max-[380px]:max-w-[90%]`}
-                >
-                    <p className="font-bold leading-relaxed uppercase tracking-wide">
-                        {t.story.content}
-                    </p>
-                </div>
-            </div>
-        </div>
+            {/* ================= NORMAL SCROLLING TEXT ================= */}
+            <section className="w-full py-24 flex justify-center px-6 bg-whitey">
+                <p className="max-w-3xl text-center uppercase font-bold text-redy text-sm md:text-2xl leading-relaxed tracking-wide">
+                    {t.story.content}
+                </p>
+            </section>
+        </>
     );
 };
 

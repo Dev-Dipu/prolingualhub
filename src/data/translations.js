@@ -31,7 +31,7 @@ export const translations = {
                 subtitle:
                     "Check your English level and see how well you perform across Grammar, Vocabulary and Speaking ability.",
                 start: "Start Assessment",
-                learn: "Start Learning",
+                learn: "Skip",
             },
             selection: {
                 title: "Complete English Skill Assessment",
@@ -265,7 +265,7 @@ export const translations = {
                 subtitle:
                     "Проверьте уровень английского и узнайте, как вы справляетесь с грамматикой, словарным запасом и разговорной речью.",
                 start: "НАЧАТЬ ТЕСТ",
-                learn: "НАЧАТЬ ОБУЧЕНИЕ",
+                learn: "Пропустить",
             },
             selection: {
                 title: "ПОЛНАЯ ОЦЕНКА НАВЫКОВ АНГЛИЙСКОГО",

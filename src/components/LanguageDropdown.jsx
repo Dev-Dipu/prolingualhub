@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 
-const languages = ["ENGLISH", "RUSSIAN", "ARABIC", "TURKISH"];
+const languages = ["ENGLISH", "RUSSIAN"];
 
 export default function LanguageDropdown() {
     const [open, setOpen] = useState(false);
