@@ -146,3 +146,7 @@
 .animate-blink-red-black {
     animation: blink-red-black 1s infinite;
 }
+
+body {
+    background-color: #ffffff;
+}

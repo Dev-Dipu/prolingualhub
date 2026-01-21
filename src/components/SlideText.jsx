@@ -11,7 +11,7 @@ const SlideText = () => {
   const wrapperRef = useRef(null);
   const { t, language } = useLanguage();
   const text = t.slideText.word; // "Book"
-  const copies = 15; // Increased copies
+  const copies = 5; // Increased copies
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -150,7 +150,7 @@ const SlideText = () => {
           <div
             key={i}
             className={`word-line flex font-bold leading-none tracking-tight transition-colors duration-300
-              ${language === "en" ? "text-6xl md:text-9xl" : "text-4xl md:text-6xl"}
+              ${language === "en" ? "text-6xl md:text-9xl" : "text-4xl md:text-9xl"}
               ${
               i === copies - 1 ? "text-black" : "text-black"
             }`}

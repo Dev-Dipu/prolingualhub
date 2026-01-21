@@ -4,13 +4,9 @@ import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lottie from "lottie-react";
+import { Mail, Phone, Linkedin } from "lucide-react";
 
 import { useLanguage } from "@/context/LanguageContext";
-
-import linkedinAnim from "../../public/lottie/linkedin.json";
-import mailAnim from "../../public/lottie/mail.json";
-import phoneAnim from "../../public/lottie/phone.json";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,10 +17,6 @@ const Footer = () => {
     const iRef = useRef(null);
     const heartRef = useRef(null);
     const textRef = useRef(null);
-
-    const linkedinRef = useRef(null);
-    const mailRef = useRef(null);
-    const phoneRef = useRef(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -111,35 +103,23 @@ const Footer = () => {
             </Link>
 
             {/* Contact Icons */}
-            <div className="absolute bottom-4 left-4 md:left-10 flex gap-1 justify-center items-center">
+            <div className="absolute bottom-6 left-0 w-full md:w-auto md:left-10 flex gap-6 justify-center md:justify-start items-center p-4">
                 {/* Email */}
                 <a
                     href="mailto:speaklanguage@prolingualhub.com"
-                    onMouseEnter={() => mailRef.current?.play()}
-                    onMouseLeave={() => mailRef.current?.stop()}
+                    className="text-gray-400 hover:text-black hover:scale-110 transition-all duration-300 transform"
+                    aria-label="Email"
                 >
-                    <Lottie
-                        lottieRef={mailRef}
-                        animationData={mailAnim}
-                        autoplay={false}
-                        loop={false}
-                        style={{ width: 60 }}
-                    />
+                    <Mail size={24} strokeWidth={1.5} />
                 </a>
 
                 {/* Phone */}
                 <a
                     href="tel:+447894994298"
-                    onMouseEnter={() => phoneRef.current?.play()}
-                    onMouseLeave={() => phoneRef.current?.stop()}
+                    className="text-gray-400 hover:text-black hover:scale-110 transition-all duration-300 transform"
+                    aria-label="Phone"
                 >
-                    <Lottie
-                        lottieRef={phoneRef}
-                        animationData={phoneAnim}
-                        autoplay={false}
-                        loop={false}
-                        style={{ width: 80 }}
-                    />
+                    <Phone size={24} strokeWidth={1.5} />
                 </a>
 
                 {/* LinkedIn */}
@@ -147,16 +127,10 @@ const Footer = () => {
                     href="https://linkedin.com/in/irina-statham-238734387"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onMouseEnter={() => linkedinRef.current?.play()}
-                    onMouseLeave={() => linkedinRef.current?.stop()}
+                    className="text-gray-400 hover:text-black hover:scale-110 transition-all duration-300 transform"
+                    aria-label="LinkedIn"
                 >
-                    <Lottie
-                        lottieRef={linkedinRef}
-                        animationData={linkedinAnim}
-                        autoplay={false}
-                        loop={false}
-                        style={{ width: 50 }}
-                    />
+                    <Linkedin size={24} strokeWidth={1.5} />
                 </a>
             </div>
         </div>
